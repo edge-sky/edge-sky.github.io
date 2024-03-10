@@ -1,681 +1,1023 @@
 <!DOCTYPE html>
-<html lang="zh-cn">
+<html lang="zh-CN">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, shrink-to-fit=no">
-    <meta name="referrer" content="origin">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <meta http-equiv="Cache-Control" content="no-transform">
-    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="Hexo Theme Redefine">
+    
+    <meta name="author" content="edge_sky">
+    <!-- preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    
+    <!--- Seo Part-->
+    
+    <link rel="canonical" href="http://8.130.138.34/"/>
+    <meta name="robots" content="index,follow">
+    <meta name="googlebot" content="index,follow">
+    <meta name="revisit-after" content="1 days">
+    
+        <meta property="og:type" content="website">
+<meta property="og:title" content="hmp&#39;s blog">
+<meta property="og:url" content="http://8.130.138.34/index.html">
+<meta property="og:site_name" content="hmp&#39;s blog">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="edge_sky">
+<meta name="twitter:card" content="summary">
+    
+    
+    <!--- Icon Part-->
+    <link rel="icon" type="image/png" href="/images/logo.ico" sizes="192x192">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/logo.ico">
+    <meta name="theme-color" content="#5175CF">
+    <link rel="shortcut icon" href="/images/logo.ico">
+    <!--- Page Info-->
+    
     <title>
         
-            hmp's blog
-        
+        hmp的小站
     </title>
-    <link rel="shortcut icon" href="#"/>
 
-    <link type="text/css" rel="stylesheet" href="/font/LongCang.css">
-    <link type="text/css" rel="stylesheet" href="/font/Monda.css">
-    <link type="text/css" rel="stylesheet" href="/font/NotoSansSC.css">
-    <link type="text/css" rel="stylesheet" href="/font/NotoSerifSC.css">
-    <link type="text/css" rel="stylesheet" href="/font/Playball.css">
-    <link type="text/css" rel="stylesheet" href="/font/PTMono.css">
-    <link type="text/css" rel="stylesheet" href="/font/Roboto.css">
-    <link type="text/css" rel="stylesheet" href="/font/RobotoSlab.css">
-    <link type="text/css" rel="stylesheet" href="/font/Rosario.css">
-    <link type="text/css" rel="stylesheet" href="/font/UbuntuMono.css">
-
-    <link type="text/css" rel="stylesheet" href="/css/base.css">
-    <link type="text/css" rel="stylesheet" href="/css/code.css">
-
-    <script type="text/javascript" src="/js/jquery-3.4.1.min.js"></script>
-<meta name="generator" content="Hexo 7.1.1"></head>
-<body>
-    <a id="cover"></a>
-    <link type="text/css" rel="stylesheet" href="/css/index.css">
-<div id="count"></div>
-<div id="header" >
-    <div class="vertical">
-        <div class="inner">
-            
-                <h1 class="header-title">edge_sky</h1>
-                <h2 class="header-description" id="hitokoto"></h2>
-                <h3 class="header-info" id="hitokotoAuthor"></h3>
-            
-        </div>
-    </div>
     
-        <a class="scroll-down" href="javascript:;" target="_self" data-offset="-45">
-            <i class="scroll-down-icon iconfont icon-return"></i>
-        </a>
+<link rel="stylesheet" href="/fonts/Chillax/chillax.css">
+
+
+    <!--- Inject Part-->
+    
+
+    
+        <style>
+    :root {
+        --preloader-background-color: #fff;
+        --preloader-text-color: #000;
+    }
+
+    @media (prefers-color-scheme: dark) {
+        :root {
+            --preloader-background-color: #202124;
+            --preloader-text-color: #fff;
+        }
+    }
+
+    @media (prefers-color-scheme: light) {
+        :root {
+            --preloader-background-color: #fff;
+            --preloader-text-color: #000;
+        }
+    }
+
+    @media (max-width: 600px) {
+        .ml13 {
+            font-size: 2.6rem !important; /* Adjust this value as needed */
+        }
+    }
+
+    .preloader {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem; /* Tailwind 'gap-4' is 1rem */
+        align-items: center;
+        justify-content: center;
+        position: fixed;
+        padding: 12px;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh; /* 'h-screen' is 100% of the viewport height */
+        background-color: var(--preloader-background-color);
+        z-index: 1100; /* 'z-[1100]' sets the z-index */
+        transition: opacity 0.2s ease-in-out;
+    }
+
+    .ml13 {
+        font-size: 3.2rem;
+        /* text-transform: uppercase; */
+        color: var(--preloader-text-color);
+        letter-spacing: -1px;
+        font-weight: 500;
+        font-family: 'Chillax-Variable', sans-serif;
+        text-align: center;
+    }
+
+    .ml13 .word {
+        display: inline-flex;
+        flex-wrap: wrap;
+        white-space: nowrap;
+    }
+
+    .ml13 .letter {
+        display: inline-block;
+        line-height: 1em;
+    }
+</style>
+
+<div class="preloader">
+    
+<script src="/js/libs/anime.min.js"></script>
+
+    <h1 class="ml13">
+        hmp的小站
+    </h1>
+    <script>
+        var textWrapper = document.querySelector('.ml13');
+        // Split text into words
+        var words = textWrapper.textContent.trim().split(' ');
+
+        // Clear the existing content
+        textWrapper.innerHTML = '';
+
+        // Wrap each word and its letters in spans
+        words.forEach(function(word) {
+            var wordSpan = document.createElement('span');
+            wordSpan.classList.add('word');
+            wordSpan.innerHTML = word.replace(/\S/g, "<span class='letter'>$&</span>");
+            textWrapper.appendChild(wordSpan);
+            textWrapper.appendChild(document.createTextNode(' ')); // Add space between words
+        });
+
+
+        anime.timeline({loop: true})
+            .add({
+                targets: '.ml13 .letter',
+                translateY: [100,0],
+                translateZ: 0,
+                opacity: [0,1],
+                easing: "easeOutExpo",
+                duration: 1400,
+                delay: (el, i) => 300 + 30 * i
+            }).add({
+            targets: '.ml13 .letter',
+            translateY: [0,-100],
+            opacity: [1,0],
+            easing: "easeInExpo",
+            duration: 1200,
+            delay: (el, i) => 100 + 30 * i
+        });
+
+        let themeStatus = JSON.parse(localStorage.getItem('REDEFINE-THEME-STATUS'))?.isDark;
+
+        // If the theme status is not found in local storage, check the preferred color scheme
+        if (themeStatus === undefined || themeStatus === null) {
+            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                themeStatus = 'dark';
+            } else {
+                themeStatus = 'light';
+            }
+        }
+
+        // Now you can use the themeStatus variable in your code
+        if (themeStatus) {
+            document.documentElement.style.setProperty('--preloader-background-color', '#202124');
+            document.documentElement.style.setProperty('--preloader-text-color', '#fff');
+        } else {
+            document.documentElement.style.setProperty('--preloader-background-color', '#fff');
+            document.documentElement.style.setProperty('--preloader-text-color', '#000');
+        }
+
+        window.addEventListener('load', function () {
+            hidePreloaderAfterTimeout(1000); // Hide after 1000 milliseconds once the window has loaded
+        });
+
+        // Backup failsafe: Hide preloader after a maximum of 5000 milliseconds, regardless of the window load event
+        hidePreloaderAfterTimeout(5000);
+
+        function hidePreloaderAfterTimeout(delay) {
+            setTimeout(function () {
+                var preloader = document.querySelector('.preloader');
+                preloader.style.opacity = '0';
+                setTimeout(function () {
+                    preloader.style.display = 'none';
+                }, 200);
+            }, delay);
+        }
+    </script>
+</div>
+    
+
+    
+<link rel="stylesheet" href="/css/style.css">
+
+
+    
+        
+<link rel="stylesheet" href="/assets/build/styles.css">
+
+    
+
+    
+<link rel="stylesheet" href="/fonts/fonts.css">
+
+    
+<link rel="stylesheet" href="/fonts/Satoshi/satoshi.css">
+
+    <!--- Font Part-->
+    
+        <link href="/fonts/HarmonyOS_Sans_SC/HarmonyOS_Sans_SC_Bold.ttf" rel="stylesheet">
+    
+    
+    
+        <link href="/fonts/HarmonyOS_Sans_SC/HarmonyOS_Sans_SC_Regular.ttf" rel="stylesheet">
+    
+    
+        <link href="/fonts/HarmonyOS_Sans_SC/HarmonyOS_Sans_SC_Regular.ttf" rel="stylesheet">
+    
+
+
+    <script id="hexo-configurations">
+    window.config = {"hostname":"8.130.138.34","root":"/","language":"zh-CN","path":"search.xml"};
+    window.theme = {"articles":{"style":{"font_size":"16px","line_height":1.5,"image_border_radius":"14px","image_alignment":"center","image_caption":false,"link_icon":true,"title_alignment":"left","headings_top_spacing":{"h1":"5rem","h2":"4rem","h3":"2.8rem","h4":"2.5rem","h5":"2.2rem","h6":"2rem"}},"word_count":{"enable":true,"count":true,"min2read":true},"author_label":{"enable":true,"auto":false,"list":[]},"code_block":{"copy":true,"style":"mac","font":{"enable":false,"family":null,"url":null}},"toc":{"enable":true,"max_depth":3,"number":false,"expand":true,"init_open":true},"copyright":{"enable":true,"default":"cc_by_nc_sa"},"lazyload":true,"recommendation":{"enable":false,"title":"推荐阅读","limit":3,"mobile_limit":2,"placeholder":"/images/wallhaven-wqery6-light.webp","skip_dirs":[]}},"colors":{"primary":"#5175CF","secondary":null,"default_mode":"light"},"global":{"fonts":{"chinese":{"enable":true,"family":"HarmonyOS_Sans_SC","url":"/fonts/HarmonyOS_Sans_SC/HarmonyOS_Sans_SC_Regular.ttf"},"english":{"enable":true,"family":"HarmonyOS_Sans_SC","url":"/fonts/HarmonyOS_Sans_SC/HarmonyOS_Sans_SC_Regular.ttf"}},"content_max_width":"1000px","sidebar_width":"210px","hover":{"shadow":true,"scale":true},"scroll_progress":{"bar":true,"percentage":false},"website_counter":{"url":null,"enable":false,"site_pv":false,"site_uv":false,"post_pv":false},"single_page":true,"preloader":true,"open_graph":true,"google_analytics":{"enable":false,"id":null}},"home_banner":{"enable":true,"style":"fixed","image":{"light":"/images/background/Furina_white.webp","dark":"/images/background/Furina_black.webp"},"title":"Make it possible","subtitle":{"text":["panda no panda","panda is pig"],"hitokoto":{"enable":false,"api":"https://v1.hitokoto.cn"},"typing_speed":100,"backing_speed":80,"starting_delay":300,"backing_delay":1500,"loop":true,"smart_backspace":true},"text_color":{"light":"#0F0E19","dark":"#d1d1b6"},"text_style":{"title_size":"2.8rem","subtitle_size":"1.5rem","line_height":1.2},"custom_font":{"enable":true,"family":"HarmonyOS_Sans_SC","url":"/fonts/HarmonyOS_Sans_SC/HarmonyOS_Sans_SC_Bold.ttf"},"social_links":{"enable":true,"style":"default","links":{"github":"https://github.com/edge-sky","email":"1109467689@qq.com"},"qrs":{"weixin":null}}},"plugins":{"feed":{"enable":false},"aplayer":{"enable":false,"type":"fixed","audios":[{"name":null,"artist":null,"url":null,"cover":null}]},"mermaid":{"enable":false,"version":"9.3.0"}},"version":"2.6.1","navbar":{"auto_hide":false,"color":{"left":"#324CAF","right":"#575B7C","transparency":35},"width":{"home":"1200px","pages":"1000px"},"links":{"Home":{"path":"/","icon":"fa-regular fa-house"},"Archives":{"path":"/archives","icon":"fa-regular fa-archive"},"About":{"icon":"fa-regular fa-user","submenus":{"Me":"/about","Github":"https://github.com/EvanNotFound/hexo-theme-redefine","Blog":"https://ohevan.com","Friends":"/friends"}}},"search":{"enable":true,"preload":false}},"page_templates":{"friends_column":2,"tags_style":"blur"},"home":{"sidebar":{"enable":true,"position":"left","first_item":"menu","announcement":"施工中","show_on_mobile":true,"links":{"Archives":{"path":"/archives","icon":"fa-regular fa-archive"},"Tags":{"path":"/tags","icon":"fa-regular fa-tags"},"Categories":{"path":"/categories","icon":"fa-regular fa-folder"}}},"article_date_format":"auto","categories":{"enable":true,"limit":3},"tags":{"enable":true,"limit":3}},"footerStart":"2022/8/17 11:45:14"};
+    window.lang_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"};
+    window.data = {"masonry":false};
+  </script>
+    
+    <!--- Fontawesome Part-->
+    
+<link rel="stylesheet" href="/fontawesome/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/brands.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/solid.min.css">
+
+    
+<link rel="stylesheet" href="/fontawesome/regular.min.css">
+
+    
+    
+    
+    
+<meta name="generator" content="Hexo 7.1.1"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+<!--        <span class="swup-progress-icon">-->
+<!--            <i class="fa-solid fa-circle-notch fa-spin"></i>-->
+<!--        </span>-->
     
 </div>
-<div id="container">
+
+
+<main class="page-container" id="swup">
+
     
         
-            <!-- 首页 -->
-            <div class="articles">
+    <style>
+        .home-banner-container {
+            background: none !important;
+        }
+        .home-article-item,
+        .sidebar-links,
+        .sidebar-content,
+        a.page-number,
+        a.extend,
+        .sidebar-links .links:hover,
+        .right-bottom-tools,
+        footer.footer {
+            background-color: var(--background-color-transparent-80) !important;
+        }
+        .right-bottom-tools:hover,
+        a.page-number:hover,
+        a.extend:hover {
+            background-color: var(--primary-color) !important;
+        }
+        .site-info,
+        .home-article-sticky-label {
+            background-color: var(--background-color-transparent-15) !important;
+        }
+        .home-article-sticky-label {
+            backdrop-filter: none !important;
+        }
+    </style>
+    <div class="home-banner-background transition-fade fixed top-0 left-0 w-screen h-screen scale-125 sm:scale-110 box-border will-change-transform bg-cover">
+        <img src="/images/background/Furina_white.webp" alt="home-banner-background" class="w-full h-full object-cover dark:hidden">
+        <img src="/images/background/Furina_black.webp" alt="home-banner-background" class="w-full h-full object-cover hidden dark:block">
+    </div>
+
+
+<div class="home-banner-container flex justify-center items-center transition-fade relative">
+    
+    <div class="content mt-8 flex flex-col justify-center items-center">
+        <div class="description flex flex-col justify-center items-center w-screen font-medium text-center"
+        
+             style="font-family: 'HarmonyOS_Sans_SC', sans-serif; !important;"
                 
-                    <div class="article">
-                        <div class="article-title">
-                            <a href="/2024/03/09/hello-world/">Hello World</a>
+        >
+            Make it possible
+            
+            
+                <p><i id="subtitle"></i></p>
+            
+        </div>
+        
+            
+            <div class="absolute bottom-0.5 flex flex-row justify-between max-w-[1340px] items-center w-full px-8 sm:px-12">
+                <div class="flex p-3 bg-gray-300/50 dark:bg-gray-500/40 backdrop-blur-lg border border-white/20 dark:border-gray-500/30 group rounded-full cursor-pointer flex justify-center items-center aspect-square h-full shadow-redefine-flat hover:shadow-redefine-flat-hover transition-shadow" onclick="scrollToMain()" >
+                    <i class="fa-solid fa-arrow-down fa-fw fa-lg group-hover:translate-y-1 transition-transform"></i>
+                </div>
+                <div class="social-contacts px-6 py-3 bg-gray-300/50 dark:bg-gray-500/40 backdrop-blur-lg border border-white/20 dark:border-gray-500/30 shadow-redefine-flat rounded-full flex flex-row gap-3 items-center">
+                    
+                        
                             
-                        </div>
-                        <div class="article-abstract">
+                                <span class="social-contact-item github">
+                                    <a target="_blank" href="https://github.com/edge-sky">
+                                        <i class="fa-brands fa-fw fa-lg fa-github"></i>
+                                    </a>
+                                </span>
                             
-                        </div>
-                        <div class="clear"></div>
-                        <div class="article-info">
+                        
+                    
+                        
+                            
+                                <span class="social-contact-item email ">
+                                    <a href="mailto:1109467689@qq.com">
+                                        <i class="fa-solid fa-fw fa-at fa-lg"></i>
+                                    </a>
+                                </span>
+                            
+                        
+                    
+                    
+                </div>
+            </div>
+        
+    </div>
+    <script>
+        const scrollToMain = ()=> {
+            console.log('scroll');
+            const target = document.querySelector('.main-content-container');
+            target.scrollIntoView({ behavior: 'smooth'});
+        }
+    </script>
+</div>
+    
+
+    <div class="main-content-container">
+
+
+        <div class="main-content-header">
+            <header class="navbar-container px-6 md:px-12">
+
+    <div class="navbar-content has-home-banner">
+        <div class="left">
+            
+                <a class="logo-image" href="/">
+                    <img src="/images/logo.ico">
+                </a>
+            
+            <a class="logo-title" href="/">
+                <h1>
+                hmp的小站
+                </h1>
+            </a>
+        </div>
+
+        <div class="right">
+            <!-- PC -->
+            <div class="desktop">
+                <ul class="navbar-list">
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="active"
+                                   href="/"
+                                        >
+                                    <i class="fa-regular fa-house fa-fw"></i>
+                                    首页
+                                    
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class=""
+                                   href="/archives"
+                                        >
+                                    <i class="fa-regular fa-archive fa-fw"></i>
+                                    归档
+                                    
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                            </li>
+                    
+                        
+                            
+
+                            <li class="navbar-item">
+                                <!-- Menu -->
+                                <a class="has-dropdown"
+                                   href="#"
+                                        onClick=&#34;return false;&#34;>
+                                    <i class="fa-regular fa-user fa-fw"></i>
+                                    关于
+                                    <i class="fa-solid fa-chevron-down fa-fw"></i>
+                                </a>
+
+                                <!-- Submenu -->
+                                
+                                    <ul class="sub-menu">
+                                        
+                                            <li>
+                                                <a href="/about">
+                                                    ME
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="https://github.com/EvanNotFound/hexo-theme-redefine">
+                                                    GITHUB
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="https://ohevan.com">
+                                                    BLOG
+                                                </a>
+                                            </li>
+                                        
+                                            <li>
+                                                <a href="/friends">
+                                                    友情链接
+                                                </a>
+                                            </li>
+                                        
+                                    </ul>
+                                
+                            </li>
+                    
+                    
+                        <li class="navbar-item search search-popup-trigger">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <!-- Mobile -->
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fa-solid fa-magnifying-glass"></i>
+                    </div>
+                
+                <div class="icon-item navbar-bar">
+                    <div class="navbar-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile sheet -->
+    <div class="navbar-drawer h-screen w-full absolute top-0 left-0 bg-background-color flex flex-col justify-between">
+        <ul class="drawer-navbar-list flex flex-col px-4 justify-center items-start">
+            
+                
+                    
+
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full active"
+                           href="/"
+                        >
                             <span>
-                                <i class="iconfont icon-time"></i> 发表时间：2024-03-09
+                                首页
                             </span>
                             
-                                
-                                    <span id="/2024/03/09/hello-world/" class="leancloud_visitors" data-flag-title="Hello World">
-                                        <i class="iconfont icon-browse"></i> 阅读：<sapn class="leancloud-visitors-count"></span>
-                                    </span>
-                                
-                                
+                                <i class="fa-regular fa-house fa-sm fa-fw"></i>
+                            
+                        </a>
+                        
+
+                        
+                    </li>
+            
+                
+                    
+
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full "
+                           href="/archives"
+                        >
+                            <span>
+                                归档
+                            </span>
+                            
+                                <i class="fa-regular fa-archive fa-sm fa-fw"></i>
+                            
+                        </a>
+                        
+
+                        
+                    </li>
+            
+                
+                    
+
+                    <li class="drawer-navbar-item-sub text-base my-1.5 flex flex-col w-full">
+                        
+                        <div class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary cursor-pointer text-2xl font-semibold group border-b border-border-color hover:border-primary w-full active"
+                             navbar-data-toggle="submenu-About"
+                        >
+                            <span>
+                                关于
+                            </span>
+                            
+                                <i class="fa-solid fa-chevron-right fa-sm fa-fw transition-all"></i>
                             
                         </div>
-                        <div class="clear"></div>     
-                    </div>
+                        
+
+                        
+                            <div class="flex-col items-start px-2 py-2 hidden" data-target="submenu-About">
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/about">ME</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="https://github.com/EvanNotFound/hexo-theme-redefine">GITHUB</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="https://ohevan.com">BLOG</a>
+                                    </div>
+                                
+                                    <div class="drawer-navbar-item text-base flex flex-col justify-center items-start hover:underline active:underline hover:underline-offset-1 rounded-3xl">
+                                        <a class=" text-third-text-color text-xl"
+                                           href="/friends">友情链接</a>
+                                    </div>
+                                
+                            </div>
+                        
+                    </li>
+            
+
+            
+            
                 
-            </div>
+                    
+                    
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full active"
+                           href="/tags"
+                        >
+                            <span>Tags</span>
+                            <i class="fa-regular fa-tags fa-sm fa-fw"></i>
+                        </a>
+                    </li>
+                
+                    
+                    <li class="drawer-navbar-item text-base my-1.5 flex flex-col w-full">
+                        <a class="py-1.5 px-2 flex flex-row items-center justify-between gap-1 hover:!text-primary active:!text-primary text-2xl font-semibold group border-b border-border-color hover:border-primary w-full active"
+                           href="/categories"
+                        >
+                            <span>Categories</span>
+                            <i class="fa-regular fa-folder fa-sm fa-fw"></i>
+                        </a>
+                    </li>
+                
             
+        </ul>
+
+        <div class="statistics flex justify-around my-2.5">
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/tags">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">0</div>
+        <div class="label text-third-text-color text-sm">标签</div>
+    </a>
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/categories">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">0</div>
+        <div class="label text-third-text-color text-sm">分类</div>
+    </a>
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/archives">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">1</div>
+        <div class="label text-third-text-color text-sm">文章</div>
+    </a>
+</div>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="main-content-body">
+
             
+                <div class="home-sidebar-container">
+    <div class="sticky-container sticky">
         
+        
+            
+                <div class="sidebar-links">
+                    <div class="site-info">
+                        <div class="site-name">hmp的小站</div>
+                        
+                            <div class="announcement">
+                                施工中
+                            </div>
+                        
+                    </div>
+                    
+                        
+                            
+                                <a class="links" href="/archives">
+                                    
+                                        <i class="fa-regular fa-archive icon-space"></i>
+                                    
+                                    <span class="link-name">Archives</span>
+                                </a>
+                            
+                        
+                            
+                                <a class="links" href="/tags">
+                                    
+                                        <i class="fa-regular fa-tags icon-space"></i>
+                                    
+                                    <span class="link-name">Tags</span>
+                                </a>
+                            
+                        
+                            
+                                <a class="links" href="/categories">
+                                    
+                                        <i class="fa-regular fa-folder icon-space"></i>
+                                    
+                                    <span class="link-name">Categories</span>
+                                </a>
+                            
+                        
+                    
+                </div>
+            
+            <div class="sidebar-content"  marginTop >
+                <div class="avatar flex justify-center">
+    <img src="/images/avatar.jpg">
+</div>
+                <div class="author flex flex-col justify-center my-2.5 mx-0">
+    <div class="name">edge_sky</div>
+    
+        <div class="label">Lv1</div>
     
 </div>
-    <div id="footer">
-    <div><span class='face'>ღゝ◡╹)ノ♡</span></div><div>【人生若只如初见<span><i class='iconfont icon-like-fill'></i></span>何事秋风悲画扇】</div><div>&copy; 2020-2023 WorstOne. All Rights Reserved.</div>
+                <div class="statistics flex justify-around my-2.5">
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/tags">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">0</div>
+        <div class="label text-third-text-color text-sm">标签</div>
+    </a>
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/categories">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">0</div>
+        <div class="label text-third-text-color text-sm">分类</div>
+    </a>
+    <a class="item tag-count-item flex flex-col justify-center items-center w-20" href="/archives">
+        <div class="number text-2xl sm:text-xl text-second-text-color font-semibold">1</div>
+        <div class="label text-third-text-color text-sm">文章</div>
+    </a>
 </div>
-    <div id="sidebar">
-    <div class="menu-wrap" style="display:none;">
+            </div>
         
-        <nav class="menu">
-            <div class="menu-introduce"> 
-                <div class="introduce-avatar">
-                    <img src="/image/sidebar/avatar.jpg">
-                </div> 
-                <div class="introduce-info"> 
-                    <div class="introduce-user">
+
+    </div>
+</div>
+
+            
+
+            <div class="main-content">
+
+                
+                    <div class="home-content-container">
+    <ul class="home-article-list">
+        
+            <li class="home-article-item">
+
+                
+
+                
+
+                
+                <div class="flex flex-col gap-5 px-7 pb-7 pt-7">
+                    <h3 class="home-article-title">
+                        <a href="/2024/03/09/hello-world/">
+                            Hello World
+                        </a>
+                    </h3>
+
+                    <div class="home-article-content markdown-body">
                         
-                            <a href="http://8.130.138.34/" target="_blank"><span>edge_sky</span></a>
+                            Welcome to Hexo ! This is your very first post. Check documentation  for more info. If you get any problems when using Hexo, ...
                         
                     </div>
-                </div> 
-            </div> 
-            <div class="menu-list">
-                <ul>
-                    
-                        <li class=" active "><a href="/" class="" target="_self"><span class="iconfont icon-home-fill"></span>首页</a></li>
-                    
-                        <li class=""><a href="/category" class="" target="_self"><span class="iconfont icon-folder-fill"></span>分类</a></li>
-                    
-                        <li class=""><a href="/tag" class="" target="_self"><span class="iconfont icon-discount-fill"></span>标签</a></li>
-                    
-                        <li class=""><a href="/about" class="" target="_self"><span class="iconfont icon-about-fill"></span>关于</a></li>
-                    
-                        <li class=""><a href="javascript:;" class="search" target="_self"><span class="iconfont icon-search-menu"></span>搜索</a></li>
-                    
-                        <li class=""><a href="/friend" class="" target="_self"><span class="iconfont icon-link"></span>友情链接</a></li>
-                    
-                </ul> 
-            </div> 
-            <div class="menu-link">
-                <div class="box">
-                    <div class="image-box"></div>
+
+                    <div class="home-article-meta-info-container">
+    <div class="home-article-meta-info">
+        <span><i class="fa-solid fa-calendars"></i>&nbsp;
+            <span class="home-article-date" data-date="Sat Mar 09 2024 16:35:02 GMT+0800">
+                
+                    2024-03-09
+                
+            </span>
+        </span>
+        
+        
+    </div>
+
+    <a href="/2024/03/09/hello-world/">阅读全文<span class="seo-reader-text">Hello World</span>&nbsp;<i class="fa-solid fa-angle-right"></i></a>
+</div>
+
                 </div>
-                
-                    <a name="QQ" href="javascript:;" class="image" target="_self" data="/image/sidebar/qq.png"><span class="iconfont icon-qq"></span></a>
-                
-                    <a name="微信" href="javascript:;" class="" target="_self" data=""><span class="iconfont icon-wechat"></span></a>
-                
-                    <a name="GitHub" href="https://github.com/edge-sky" class="" target="_blank" data=""><span class="iconfont icon-github"></span></a>
-                
-            </div> 
-        </nav>
-        <button class="menu-button-close"></button>
-        <div class="morph-shape" id="morph-shape" data-morph-open="M-7.312,0H15c0,0,66,113.339,66,399.5C81,664.006,15,800,15,800H-7.312V0z;M-7.312,0H100c0,0,0,113.839,0,400c0,264.506,0,400,0,400H-7.312V0z">
-            <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 100 800" preserveAspectRatio="none">
-                <path d="M-7.312,0H0c0,0,0,113.839,0,400c0,264.506,0,400,0,400h-7.312V0z"/>
-            </svg>
-        </div>
-    </div>
-    <button class="menu-button-open">MENU</button>
-    <div class="menu-cover"></div>
+            </li>
+        
+    </ul>
+
+    <div class="home-paginator px-7 py-5">
+        <div class="paginator">
+    <span class="page-number current">1</span>
 </div>
-    <link type="text/css" rel="stylesheet" href="/css/search.css">
-<script type="text/javascript" src="/js/iscroll.js"></script>
-<script type="text/javascript" src="/js/instantsearch.min.js"></script>
-<div class="search-window">
-    <div class="search-content">
-        <div class="search-content-icon">
-            <i class="iconfont icon-search"></i>
+
+    </div>
+</div>
+
+                    <div class="comment-container pjax"></div>
+                
+
+            </div>
+
+            
+
         </div>
-        <div id="search-input" class="search-input"></div>
+
+        <div class="main-content-footer">
+            <footer class="footer mt-5 py-5 h-auto text-base text-third-text-color relative border-t-2 border-t-border-color">
+    <div class="info-container py-3 text-center">
+        
+        <div class="text-center">
+            &copy;
+            
+              <span>2022</span>
+              -
+            
+            2024&nbsp;&nbsp;<i class="fa-solid fa-heart fa-beat" style="--fa-animation-duration: 0.5s; color: #f54545"></i>&nbsp;&nbsp;<a href="/">edge_sky</a>
+            
+                
+                <p class="post-count space-x-0.5">
+                    <span>
+                        共 1 篇文章
+                    </span>
+                    
+                </p>
+            
+        </div>
+        
+        <div class="relative text-center lg:absolute lg:left-[20px] lg:top-1/2 lg:-translate-y-1/2 lg:text-left">
+            <span class="lg:block text-sm">由 <?xml version="1.0" encoding="utf-8"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg class="relative top-[2px] inline-block align-baseline" version="1.1" id="圖層_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="1rem" height="1rem" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve"><path fill="#0E83CD" d="M256.4,25.8l-200,115.5L56,371.5l199.6,114.7l200-115.5l0.4-230.2L256.4,25.8z M349,354.6l-18.4,10.7l-18.6-11V275H200v79.6l-18.4,10.7l-18.6-11v-197l18.5-10.6l18.5,10.8V237h112v-79.6l18.5-10.6l18.5,10.8V354.6z"/></svg><a target="_blank" class="text-base" href="https://hexo.io">Hexo</a> 驱动</span>
+            <span class="text-sm lg:block">主题&nbsp;<a class="text-base" target="_blank" href="https://github.com/EvanNotFound/hexo-theme-redefine">Redefine v2.6.1</a></span>
+        </div>
+        
+        
+            <div>
+                博客已运行 <span class="odometer" id="runtime_days" ></span> 天 <span class="odometer" id="runtime_hours"></span> 小时 <span class="odometer" id="runtime_minutes"></span> 分钟 <span class="odometer" id="runtime_seconds"></span> 秒
+            </div>
+        
+        
+            <script data-swup-reload-script>
+                try {
+                    function odometer_init() {
+                    const elements = document.querySelectorAll('.odometer');
+                    elements.forEach(el => {
+                        new Odometer({
+                            el,
+                            format: '( ddd).dd',
+                            duration: 200
+                        });
+                    });
+                    }
+                    odometer_init();
+                } catch (error) {}
+            </script>
+        
+        
+        
+    </div>  
+</footer>
+        </div>
     </div>
 
-    <div class="search-scroll">
-        <div class="search-result">
-            <div id="search-stats" class="search-stats"></div>
-            <div id="search-hits"></div>
-            <div id="search-pagination" class="search-pagination"></div>
-        </div>
-    </div>
-
-    <span class="search-close-icon">
-        <i class="iconfont icon-close"></i>
-    </span>
-</div>
-    <div id="tools">
-    <div class="progressbar-top"></div>
     
-    <link type="text/css" rel="stylesheet" href="/css/APlayer.css">
-    <script type="text/javascript" src="/js/APlayer.min.js"></script>
-    <script type="text/javascript" src="/js/Meting.min.js"></script>
-    <script>
-        var meting_api = 'https://api.i-meto.com/meting/api?server=:server&type=:type&id=:id&auth=:auth&r=:r';
-    </script>
-    <meting-js id="3778678" lrcshow="false" server="netease" type="playlist" fixed="true" autoplay="false" loop="all" order="random" preload="auto" volume="0.67" mutex="true"></meting-js>
 
-    <div class="wrap-right">
-    <div class="wrap-right-hide">
-         <div class="wrap-right-button favorites">
-            <div class="iconbox" switch="false">
-                <span class="iconfont icon-favorites"></span>
-            </div>
-            <span class="icontext">关注</span>
-         </div>
-        <div class="wrap-right-button search">
-            <div class="iconbox">
-                <span class="iconfont icon-search-menu"></span>
-            </div>
-            <span class="icontext">搜索</span>
-        </div>
-        <div class="wrap-right-button menu-button">
-            <div class="iconbox">
-                <span class="iconfont icon-menu"></span>
-            </div>
-            <span class="icontext">菜单</span>
-        </div>
-        <div class="wrap-right-button mode">
-            <div class="light">
-                <div class="iconbox">
-                    <span class="iconfont icon-daymode"></span>
-                </div>
-                <span class="icontext">浅色模式</span>
-            </div>
-            <div class="dark">
-                <div class="iconbox">
-                    <span class="iconfont icon-nightmode-fill"></span>
-                </div>
-                <span class="icontext">深色模式</span>
-            </div>
-        </div>
-        <div class="wrap-right-button bottom">
-            <div class="iconbox">
-                <span class="iconfont icon-top"></span>
-            </div>
-            <span class="icontext">跳至底部</span>
-        </div>
+    <div class="right-side-tools-container">
+        <div class="side-tools-container">
+    <ul class="hidden-tools-list">
+        <li class="right-bottom-tools tool-font-adjust-plus flex justify-center items-center">
+            <i class="fa-regular fa-magnifying-glass-plus"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-font-adjust-minus flex justify-center items-center">
+            <i class="fa-regular fa-magnifying-glass-minus"></i>
+        </li>
+
+        <li class="right-bottom-tools tool-dark-light-toggle flex justify-center items-center">
+            <i class="fa-regular fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+            <li class="right-bottom-tools tool-scroll-to-top flex justify-center items-center">
+                <i class="fa-regular fa-arrow-up"></i>
+            </li>
+        
+
+        <li class="right-bottom-tools tool-scroll-to-bottom flex justify-center items-center">
+            <i class="fa-regular fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="visible-tools-list">
+        <li class="right-bottom-tools toggle-tools-list flex justify-center items-center">
+            <i class="fa-regular fa-cog fa-spin"></i>
+        </li>
+        
+        
+    </ul>
+</div>
+
     </div>
-    <div class="wrap-right-show">
-        <div class="wrap-right-button set">
-            <div class="iconbox">
-                <span class="iconfont icon-setting"></span>
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fa-solid fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
             </div>
-            <span class="icontext">设置</span>
+            <span class="popup-btn-close">
+                <i class="fa-solid fa-times"></i>
+            </span>
         </div>
-        <div class="wrap-right-button top">
-            <div class="iconbox">
-                <span class="iconfont icon-top"></span>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fa-solid fa-spinner fa-spin-pulse fa-5x fa-fw"></i>
             </div>
-            <span class="icontext">返回顶部</span>
         </div>
     </div>
 </div>
-    <div class="loading"></div>
-</div>
-    <script>
-    window.config = {
-        GitHubUserName     : "first19326",
-        GitHubRepositories : "Hexo-LiveForCode",
 
-        User             : "edge_sky",
-        UserAvatar       : "/image/sidebar/avatar.jpg",
-        WebsiteStartDate : "2024-03-09",
-        Home             : "http://8.130.138.34/",
+    
 
-        WebsiteTitleBlur         : "(◍´꒳`◍) Hi, Live For Code",
-        WebsiteTitleBlurTimeOut  : 500,
-        WebsiteTitleFocus        : "(*´∇｀*) 欢迎回来!",
-        WebsiteTitleFocusTimeOut : 1000,
-        WebsiteFavicon           : {
-            light : "/image/website/logo/logo.png",
-            dark  : "/image/website/logo/logo-dark.png"
-        },
+</main>
 
-        ProgressBar : {
-            id       : "topProgressBar",
-            color    : "#77B6FF",
-            height   : "2px",
-            duration : 0.2
-        },
 
-        Loading: {
-            rebound : {
-                tension  : 16,
-                friction : 5
-            },
-            spinner : {
-                id     : "spinner",
-                radius : 90,
-                sides  : 3,
-                depth  : 4,
-                colors : {
-                    background : "#F0F0F0",
-                    stroke     : "#272633",
-                    base       : "",
-                    child      : "#272633"
-                },
-                alwaysForward : true,
-                restAt        : 0.5,
-                renderBase    : false
-            }
-        },
+    
+<script src="/js/libs/Swup.min.js"></script>
 
-        HomeHeaderAnimationRendered : true,
-        HomeHeaderAnimation         : {
-            radius      : 15,
-            density     : 0.2,
-            color       : "rgba(255, 255, 255, .2)",
-            clearOffset : 0.3
-        },
+<script src="/js/libs/SwupSlideTheme.min.js"></script>
 
-        BackAnimationRendered          : true,
-        IEBrowserBackAnimationRendered : false,
-        BackAnimation                  : {
-            colorSaturation  : "60%",
-            colorBrightness  : "50%",
-            colorAlpha       : 0.5,
-            colorCycleSpeed  : 5,
-            verticalPosition : "random",
-            horizontalSpeed  : 200,
-            ribbonCount      : 3,
-            strokeSize       : 0,
-            parallaxAmount   : -0.2,
-            animateSections  : true
-        },
+<script src="/js/libs/SwupScriptsPlugin.min.js"></script>
 
-        HomeHeaderImage : [
-            
-                "/image/header/Furina_black.jpg",
-            
-                "/image/header/Furina_white.jpg",
-            
+<script src="/js/libs/SwupProgressPlugin.min.js"></script>
+
+<script src="/js/libs/SwupScrollPlugin.min.js"></script>
+
+<script src="/js/libs/SwupPreloadPlugin.min.js"></script>
+
+<script>
+    const swup = new Swup({
+        plugins: [
+            new SwupScriptsPlugin({
+                optin: true,
+            }),
+            new SwupProgressPlugin(),
+            new SwupScrollPlugin({
+                offset: 80,
+            }),
+            new SwupSlideTheme({
+                mainElement: ".main-content-body",
+            }),
+            new SwupPreloadPlugin(),
         ],
-        HomeBannerText  : "",
-
-        ArticleHeaderImage : [
-            
-                "/image/header/article.jpg",
-            
-        ],
-
-        OtherBannerText : "",
-
-        Error : {
-            icon    : "icon-swimming",
-            title   : "PAGE NOT FOUND",
-            content : [
-                
-                    "很抱歉，您访问的页面不存在！",
-                
-                    "可能是输入地址有误或该地址已变更。",
-                
-            ],
-            buttons : [
-                
-                    {
-                        icon  : "icon-home",
-                        text  : "返回首页",
-                        href  : "/",
-                        class : ""
-                    },
-                
-            ]
-        },
-
-        MenuNotice : {
-            enable : false,
-            notice : "简单地活着，肆意而又精彩！",
-            speed  : 20
-        },
-        MenuList : [
-            
-                {
-                    name   : "首页",
-                    icon   : "icon-home-fill",
-                    href   : "/",
-                    type   : "index",
-                    class  : "",
-                    target : "_self"
-                },
-            
-                {
-                    name   : "分类",
-                    icon   : "icon-folder-fill",
-                    href   : "/category",
-                    type   : "category",
-                    class  : "",
-                    target : "_self"
-                },
-            
-                {
-                    name   : "标签",
-                    icon   : "icon-discount-fill",
-                    href   : "/tag",
-                    type   : "tag",
-                    class  : "",
-                    target : "_self"
-                },
-            
-                {
-                    name   : "关于",
-                    icon   : "icon-about-fill",
-                    href   : "/about",
-                    type   : "about",
-                    class  : "",
-                    target : "_self"
-                },
-            
-                {
-                    name   : "搜索",
-                    icon   : "icon-search-menu",
-                    href   : "javascript:;",
-                    type   : "",
-                    class  : "search",
-                    target : "_self"
-                },
-            
-                {
-                    name   : "友情链接",
-                    icon   : "icon-link",
-                    href   : "/friend",
-                    type   : "friend",
-                    class  : "",
-                    target : "_self"
-                },
-            
-        ],
-        MenuLink : [
-            
-                
-                    {
-                        name   : "QQ",
-                        icon   : "icon-qq",
-                        href   : "javascript:;",
-                        class  : "image",
-                        target : "_self",
-                        image  : "/image/sidebar/qq.png"
-                    },
-                
-                    {
-                        name   : "微信",
-                        icon   : "icon-wechat",
-                        href   : "javascript:;",
-                        class  : "",
-                        target : "_self",
-                        image  : ""
-                    },
-                
-                    {
-                        name   : "GitHub",
-                        icon   : "icon-github",
-                        href   : "https://github.com/edge-sky",
-                        class  : "",
-                        target : "_blank",
-                        image  : ""
-                    },
-                
-            
-        ],
-
-        FooterStyle : 2,
-        BottomText  : "<div><span class='face'>ღゝ◡╹)ノ♡</span></div><div>【人生若只如初见<span><i class='iconfont icon-like-fill'></i></span>何事秋风悲画扇】</div><div>&copy; 2020-2023 WorstOne. All Rights Reserved.</div>",
-
-        ConsoleList : [
-            
-                
-                    [
-                        
-                            
-                                "Based on cnblogs theme SimpleMemory.",
-                            
-                                "",
-                            
-                        
-                    ],
-                
-                    [
-                        
-                            
-                                "SimpleMemory Author:",
-                            
-                                "BNDong",
-                            
-                        
-                    ],
-                
-                    [
-                        
-                            
-                                "Theme:",
-                            
-                                "LiveForCode",
-                            
-                        
-                    ],
-                
-            
-        ],
-
-        FontIconExtend : "",
-
-        Donate : {
-            paypal  : "",
-            bitcoin : "",
-            alipay  : "",
-            wechat  : ""
-        },
-
-        Search : {
-            applicationID : "",
-            apiKey        : "",
-            indexName     : "Notes",
-            hits          : {
-                page : 10
-            },
-            labels        : {
-                placeholder : "搜索",
-                empty       : "未发现与 「${query}」 相关的内容",
-                stats       : "${hits} 条相关条目，使用了 ${time} 毫秒",
-            }
-        }, 
-
-        Comment : {
-            switch : false,
-            type   : "Valine",
-        },
-
-        Waline : {
-            el              : ".comments-content",
-            serverURL       : "",
-            path            : window.location.pathname,
-            meta            : "['nick', 'mail', 'link']",
-            requiredMeta    : "['nick', 'mail']",
-            pageSize        : 10,
-            lang            : "zh-cn",
-            locale: {
-                admin       : "博主",
-                anonymous   : "匿名用户",
-                sofa        : "快来做第一个评论的人吧 ~",
-                placeholder : "你是我一生只会遇见一次的惊喜...",
-            },
-            dark            : "html[color-scheme='dark']",
-            search          : false,
-            pageview        : true,
-            comment         : true,
-            copyright       : false,
-        },
-
-        Valine : {
-            el             : ".comments-content",
-            appId          : "",
-            appKey         : "",
-            serverURLs     : "",
-            placeholder    : "你是我一生只会遇见一次的惊喜...",
-            avatar         : "mm",
-            meta           : "nick,mail,link",
-            requiredFields : "nick,mail",
-            pageSize       : 5,
-            lang           : "zh-cn",
-            visitor        : true,
-            enableQQ       : true
-        },
-
-        Tocbot : {
-            switch                : true,
-            tocSelector           : ".toc",
-            contentSelector       : ".article-body",
-            headingSelector       : "h1, h2, h3, h4, h5",
-            headingsOffset        : 0,
-            scrollSmooth          : true,
-            scrollSmoothOffset    : -5,
-            positionFixedSelector : ".toc",
-            positionFixedClass    : "toc-fixed",
-            fixedSidebarOffset    : "",
-        },
-
-        Require : {
-            baseUrl     : "/js/",
-            waitSeconds : 100
-        },
-
-        Music : {
-            type : "Meting"
-        },
-        APlayer : {
-            container : ".aplayer",
-            fixed     : true,
-            autoplay  : false,
-            loop      : "all",
-            order     : "random",
-            preload   : "auto",
-            volume    : 0.67,
-            mutex     : true,
-            lrcType   : 3,
-            audio     : [
-                
-                    {
-                        name   : "Endless Tears",
-                        artist : "CLIFF EDGE",
-                        cover  : "/music/cover/Endless Tears.jpg",
-                        url    : "/music/song/Endless Tears.mp3",
-                        lrc    : "/music/lrc/Endless Tears.lrc"
-                    },
-                
-            ]
-        },
-        Meting : {
-            api      : "https://api.i-meto.com/meting/api",
-            id       : "3778678", 
-            lrcshow  : false, 
-            server   : "netease", 
-            type     : "playlist", 
-            fixed    : true, 
-            autoplay : false, 
-            loop     : "all", 
-            order    : "random", 
-            preload  : "auto", 
-            volume   : 0.67, 
-            mutex    : true
-        },
-
-        Mouse : {
-            enable  : true,
-            options : {
-                size  : 6,
-                sizeF : 24
-            }
-        },
-
-        LazyLoad : {
-            default : "/image/website/lazyload.svg"
-        },
-  
-        Style : {
-            aplayer          : "/css/APlayer.css",
-            archive          : "/css/archive.css",
-            base             : "/css/base.css",
-            clipboard        : "/css/clipboard.css",
-            code             : "/css/code.css",
-            donate           : "/css/donate.css",
-            fancybox         : "/css/jquery.fancybox.css",
-            footer           : "/css/footer.css",
-            iconfont         : "/iconfont/iconfont.css",
-            index            : "/css/index.css",
-            menuBubble       : "/css/menu-bubble.css",
-            mouse            : "/css/mouse.css",
-            page             : "/css/page.css",
-            post             : "/css/post.css",
-            search           : "/css/search.css",
-            tocbot           : "/css/tocbot.css",
-            valine           : "/css/valine.css",
-            waline           : "/css/waline.css",
-            walineCustom     : "/css/waline-custom.css"
-        },
-
-        Script: {
-            aplayer          : "/js/APlayer.min.js",
-            config           : "/js/require.config.js",
-            index            : "/js/index.js",
-            instantSearch    : "/js/instantsearch.min.js",
-            iscroll          : "/js/iscroll.js",
-            jQuery           : "/js/jquery-3.4.1.min.js",
-            loading          : "/js/loading.js",
-            meting           : "/js/Meting.min.js",
-            require          : "/js/require.min.js",
-            waline           : "/js/waline.mjs",
-            pageview         : "/js/pageview.mjs",
-            comment          : "/js/comment.mjs",
-        },
-
-        Font: {
-            LongCang    : "/font/LongCang.css",
-            Monda       : "/font/Monda.css",
-            NotoSansSC  : "/font/NotoSansSC.css",
-            NotoSerifSC : "/font/NotoSerifSC.css",
-            Playball    : "/font/Playball.css",
-            PTMono      : "/font/PTMono.css",
-            Roboto      : "/font/Roboto.css",
-            RobotoSlab  : "/font/RobotoSlab.css",
-            Rosario     : "/font/Rosario.css",
-            UbuntuMono  : "/font/UbuntuMono.css"
-        },
-
-        Suffix : {
-            about : "广告位"
-        },
-            
-        Theme : {
-            url  : "https://github.com/first19326/Hexo-LiveForCode",
-            name : "Hexo - Live For Code"
-        }  
-    };
+        containers: ["#swup"],
+    });
 </script>
-    <script type="text/javascript" src="/js/index.js"></script>
+
+
+
+
+
+
+
+
+<script src="/js/tools/imageViewer.js" type="module"></script>
+
+<script src="/js/utils.js" type="module"></script>
+
+<script src="/js/main.js" type="module"></script>
+
+<script src="/js/layouts/navbarShrink.js" type="module"></script>
+
+<script src="/js/tools/scrollTopBottom.js" type="module"></script>
+
+<script src="/js/tools/lightDarkSwitch.js" type="module"></script>
+
+<script src="/js/layouts/categoryList.js" type="module"></script>
+
+
+
+    
+<script src="/js/tools/localSearch.js" type="module"></script>
+
+
+
+
+    
+<script src="/js/tools/codeBlock.js" type="module"></script>
+
+
+
+
+    
+<script src="/js/layouts/lazyload.js" type="module"></script>
+
+
+
+
+    
+<script src="/js/tools/runtime.js"></script>
+
+    
+<script src="/js/libs/odometer.min.js"></script>
+
+    
+<link rel="stylesheet" href="/assets/odometer-theme-minimal.css">
+
+
+
+
+  
+<script src="/js/libs/Typed.min.js"></script>
+
+  
+<script src="/js/plugins/typed.js" type="module"></script>
+
+
+
+
+
+
+
+
+
+<div class="post-scripts" data-swup-reload-script>
+    
+        
+<script src="/js/tools/tocToggle.js" type="module"></script>
+
+<script src="/js/layouts/toc.js" type="module"></script>
+
+<script src="/js/plugins/tabs.js" type="module"></script>
+
+    
+</div>
+
+
 </body>
 </html>
