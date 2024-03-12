@@ -1,21 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Hello World</title>
-    <url>/2024/03/09/hello-world/</url>
-    <content><![CDATA[<p>Welcome to <a class="link"   href="https://hexo.io/" >Hexo <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>! This is your very first post. Check <a class="link"   href="https://hexo.io/docs/" >documentation <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a> for more info. If you get any problems when using Hexo, you can find the answer in <a class="link"   href="https://hexo.io/docs/troubleshooting.html" >troubleshooting <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a> or you can ask me on <a class="link"   href="https://github.com/hexojs/hexo/issues" >GitHub <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure></div>
+    <title>Hexo性能优化</title>
+    <url>/2024/03/12/Hexo%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/</url>
+    <content><![CDATA[<h1 id="HEXO-性能优化及-hexo-all-minifier-无法安装"><a href="#HEXO-性能优化及-hexo-all-minifier-无法安装" class="headerlink" title="HEXO 性能优化及 hexo-all-minifier 无法安装"></a>HEXO 性能优化及 hexo-all-minifier 无法安装</h1><p>使用 hexo-all-minifier 插件，依照作者描述，该插件集合了</p>
+<ul>
+<li>hexo-html-minifier</li>
+<li>hexo-clean-css</li>
+<li>hexo-uglify</li>
+<li>hexo-imagemin</li>
+</ul>
+<p>可有效减少静态网页的体积</p>
+<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">npm install hexo-all-minifier --save</span><br></pre></td></tr></table></figure></div>
 
-<p>More info: <a class="link"   href="https://hexo.io/docs/writing.html" >Writing <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure></div>
+<p>可能报错，大概是证书无法验证或是啥啥啥找不到，估计是网络问题，执行</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">npm install hexo-all-minifier --save --ignore-scripts</span><br></pre></td></tr></table></figure></div>
 
-<p>More info: <a class="link"   href="https://hexo.io/docs/server.html" >Server <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure></div>
+<p>强行安装</p>
+<p>看似安装完成后，进行hexo g编译，又会报错，大概是缺少一个叫 optipng.exe 的组件，两个方法</p>
+<ol>
+<li>禁用图片压缩</li>
+</ol>
+<div class="highlight-container" data-rel="Yaml"><figure class="iseeu highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">image_minifier:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">false</span></span><br><span class="line">  <span class="attr">interlaced:</span> <span class="literal">false</span></span><br><span class="line">  <span class="attr">multipass:</span> <span class="literal">false</span></span><br><span class="line">  <span class="attr">optimizationLevel:</span> <span class="number">2</span></span><br><span class="line">  <span class="attr">pngquant:</span> <span class="literal">false</span></span><br><span class="line">  <span class="attr">progressive:</span> <span class="literal">false</span></span><br><span class="line">  <span class="attr">silent:</span> <span class="literal">false</span></span><br></pre></td></tr></table></figure></div>
 
-<p>More info: <a class="link"   href="https://hexo.io/docs/generating.html" >Generating <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure></div>
-
-<p>More info: <a class="link"   href="https://hexo.io/docs/one-command-deployment.html" >Deployment <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<ol start="2">
+<li>手动下载 optipng.exe 放在 node_modules&#x2F;optipng-bin&#x2F;vendor 下，注意不是 node_modules&#x2F;optipng-bin&#x2F;vendor&#x2F;source 下</li>
+</ol>
+<p>如果你的资源文件中有.jpg文件，很有可能又会报 EOF 错</p>
+<p>在 .\node_modules\hexo-all-minifier\lib\optimizeImage.js 将 <code>let targetfile = [&#39;jpg&#39;, &#39;gif&#39;, &#39;png&#39;, &#39;svg&#39;];</code> 修改为 &#96;let targetfile &#x3D; [‘jpeg’, ‘gif’, ‘png’, ‘svg’];</p>
+<p>但似乎就不能压缩jpg了，如果你把 jpg 的后缀改为 jepg，又会报错（真奇怪</p>
+<p>参考：<a class="link"   href="https://huanghaoh.gitee.io/posts/b4d39b7f/" >Hexo 插件 hexo-all-minifier 的异常处理 | Huanghao’s blog (gitee.io) <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
 ]]></content>
   </entry>
 </search>
