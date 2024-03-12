@@ -31,5 +31,8 @@
 <p>但似乎就不能压缩jpg了，如果你把 jpg 的后缀改为 jepg，又会报错（真奇怪</p>
 <p>参考：<a class="link"   href="https://huanghaoh.gitee.io/posts/b4d39b7f/" >Hexo 插件 hexo-all-minifier 的异常处理 | Huanghao’s blog (gitee.io) <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
 ]]></content>
+      <categories>
+        <category>踩坑记录</category>
+      </categories>
   </entry>
 </search>
