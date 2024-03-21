@@ -35,4 +35,23 @@
         <category>踩坑记录</category>
       </categories>
   </entry>
+  <entry>
+    <title>nginx 禁止 ip 直接访问，放行域名请求</title>
+    <url>/2024/03/21/%E5%85%B3%E4%BA%8E%20nginx%20%E7%A6%81%E6%AD%A2%20ip%20%E7%9B%B4%E6%8E%A5%E8%AE%BF%E9%97%AE/</url>
+    <content><![CDATA[<p>首先，进入 nginx 的配置文件</p>
+<p>获取配置文件地址</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">nginx -t</span><br><span class="line"></span><br><span class="line">vi &lt;你的路径/nginx.conf&gt;</span><br></pre></td></tr></table></figure></div>
+
+<p>在 http 作用域内添加</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">	listen 80 default;// 监听80端口(http)的默认地址，也就是你的ip</span><br><span class="line">	<span class="built_in">return</span> 403;// 返回403</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<h3 id="放行来自你的域名的请求"><a href="#放行来自你的域名的请求" class="headerlink" title="放行来自你的域名的请求"></a>放行来自你的域名的请求</h3><p>同样在 nginx.conf 的 http 作用域内</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">	listen 80;</span><br><span class="line">	server_name ishmp.cn *.ishmp.cn;// 例如我的域名解析允许域名直接访问和泛解析，这里放行这两种形式域名请求</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p>重启 nginx，你就会发现ip直接访问会得到403错误码，放行的域名可正常访问</p>
+]]></content>
+      <categories>
+        <category>技术记录</category>
+      </categories>
+  </entry>
 </search>
