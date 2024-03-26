@@ -54,4 +54,368 @@
         <category>技术记录</category>
       </categories>
   </entry>
+  <entry>
+    <title>YOLOV8环境配置速通</title>
+    <url>/2024/03/26/YOLOV8%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E9%80%9F%E9%80%9A/</url>
+    <content><![CDATA[<h2 id="前置安装软件"><a href="#前置安装软件" class="headerlink" title="前置安装软件"></a>前置安装软件</h2><ul>
+<li>python8+</li>
+<li>Anaconda（mini版也可以）（记得加入环境变量）</li>
+</ul>
+<h2 id="创建想虚拟环境"><a href="#创建想虚拟环境" class="headerlink" title="创建想虚拟环境"></a>创建想虚拟环境</h2><p><em>前置条件</em> anaconda 环境良好</p>
+<p>win + s，或在快捷方式里找到 Anaconda Prompt (Anaconda)</p>
+<p>创建一个名为 yolov8(自行取名) 的环境</p>
+<div class="highlight-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">conda create -n yolov8 python=3.8</span><br></pre></td></tr></table></figure></div>
+
+<p>查看环境列表</p>
+<div class="highlight-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">conda env list</span><br></pre></td></tr></table></figure></div>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://img2.imgtp.com/2024/03/26/ymGTCGNy.png"
+                      alt="{01}"
+                ></p>
+<p>切换到新创建的环境</p>
+<div class="highlight-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">activate yolov8</span><br></pre></td></tr></table></figure></div>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://img2.imgtp.com/2024/03/26/EjaXlD9R.png"
+                      alt="{02}"
+                ></p>
+<h2 id="安装cuda-cudnn-使用N卡下"><a href="#安装cuda-cudnn-使用N卡下" class="headerlink" title="安装cuda + cudnn(使用N卡下)"></a>安装cuda + cudnn(使用N卡下)</h2><p>更换清华镜像源(如需要)</p>
+<div class="highlight-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">conda config --add channels http://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/win-64</span><br><span class="line">conda config --add channels http://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/win-64</span><br><span class="line">conda config --set show_channel_urls yes</span><br></pre></td></tr></table></figure></div>
+
+<p>查看 cuda 的支持版本</p>
+<div class="highlight-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">nvidia-smi</span><br></pre></td></tr></table></figure></div>
+
+<p>进入 <a class="link"   href="https://developer.nvidia.com/cuda-toolkit" >CUDA Toolkit - Free Tools and Training | NVIDIA Developer <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a> 安装相应版本的cuda工具</p>
+<p>进入 <a class="link"   href="https://developer.nvidia.com/cudnn" >CUDA Deep Neural Network (cuDNN) | NVIDIA Developer <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a> 安装相应 cuda 的 cudann</p>
+<h2 id="安装-pytorch"><a href="#安装-pytorch" class="headerlink" title="安装 pytorch"></a>安装 pytorch</h2><p><a class="link"   href="https://pytorch.org/get-started/locally/" >Start Locally | PyTorch <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<p>根据你的环境安装</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://img2.imgtp.com/2024/03/26/uCfPovPu.png"
+                      alt="{03}"
+                ></p>
+<p>使用conda的包，选好版本后复制进 yolov8 环境下的命令窗口运行</p>
+<h2 id="安装ultralytics"><a href="#安装ultralytics" class="headerlink" title="安装ultralytics"></a>安装ultralytics</h2><ol>
+<li>使用CLI</li>
+</ol>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">pip install ultralytics</span><br></pre></td></tr></table></figure></div>
+
+<ol start="2">
+<li>直接 clone 源码解压</li>
+</ol>
+<p>进入源码目录，输入</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">pip install -e</span><br></pre></td></tr></table></figure></div>
+
+<p>安装</p>
+<h2 id="下载训练模型"><a href="#下载训练模型" class="headerlink" title="下载训练模型"></a>下载训练模型</h2><p><a class="link"   href="https://github.com/ultralytics/assets/releases" >Releases · ultralytics&#x2F;assets (github.com) <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<p>选择合适的训练模型下载</p>
+<h2 id="标记图片"><a href="#标记图片" class="headerlink" title="标记图片"></a>标记图片</h2><h3 id="安装-labelimg"><a href="#安装-labelimg" class="headerlink" title="安装 labelimg"></a>安装 labelimg</h3><p><strong>pip 安装</strong></p>
+<p>依次执行</p>
+<div class="highlight-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">pip install PyQt5</span><br><span class="line">pip install pyqt5-tools</span><br><span class="line">pip install lxml</span><br><span class="line">pip install labelimg</span><br></pre></td></tr></table></figure></div>
+
+<p><strong>conda 安装</strong></p>
+<p>conda 会自动安装相关的依赖包</p>
+<div class="highlight-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">conda install labelimg</span><br></pre></td></tr></table></figure></div>
+
+<h2 id="使用-labelimg-对图片标注"><a href="#使用-labelimg-对图片标注" class="headerlink" title="使用 labelimg 对图片标注"></a>使用 labelimg 对图片标注</h2><ul>
+<li>在 yolov8 环境下执行命令行</li>
+</ul>
+<div class="highlight-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">labelimg</span><br></pre></td></tr></table></figure></div>
+
+<ul>
+<li>建议勾选自动保存</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://img2.imgtp.com/2024/03/26/JEB7UF8D.png"
+                      alt="{04}"
+                ></p>
+<ul>
+<li>点击标记格式更改为 YOLO，从上至下分别是：打开单个图片，打开一个文件夹，更改保存文件夹，下一张图片，上一张图片，确认图片，保存</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://img2.imgtp.com/2024/03/26/eQIujVNx.png"
+                      alt="{05}"
+                ></p>
+<ul>
+<li>导入图片后，右键选择 Create Rectbox 或 “W” 快捷键进入标记模式，框选主体，在弹出的框中输入主题的名字，例如下图输入 panda，点击回车或 OK 后完成这一主体的标记。</li>
+<li>单个图片可以标记多个主体，完成标记后如果选择自动保存可以直接进入下一张继续标记，否则记得点击保存~</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://img2.imgtp.com/2024/03/26/8LLMMukp.png"
+                      alt="{06}"
+                ></p>
+<ul>
+<li>完成标记后得到一批 图片名.txt 的文件以及 class.txt 文件，训练主要需要 图片名.txt 文件，class.txt 记录有多少的分类以及分类名</li>
+</ul>
+<h2 id="训练"><a href="#训练" class="headerlink" title="训练"></a>训练</h2><h3 id="数据集文件树"><a href="#数据集文件树" class="headerlink" title="数据集文件树"></a>数据集文件树</h3><p>构建以下结构的文件夹目录，用于存放数据</p>
+<p>将被标记的图片放在 dataset&#x2F;images&#x2F;train 中，与被标记具有相同主体的未标记图片放在 dataset&#x2F;images&#x2F;val 中用于验证</p>
+<p>将标记生成的 图片名.txt 放入 dataset&#x2F;labels&#x2F;train 中，务必和标记的图片一一对应</p>
+<div class="highlight-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">dataset</span><br><span class="line">  --images</span><br><span class="line">    --train(存放训练的图片)</span><br><span class="line">    --val(用于验证的图片)</span><br><span class="line">    --test(optional)</span><br><span class="line">  --labels</span><br><span class="line">    --train(与训练图片相对应得标签文件)</span><br><span class="line">    --val</span><br><span class="line">    --test(optional)</span><br></pre></td></tr></table></figure></div>
+
+
+
+<h3 id="model中-pt-和-yaml-的区别"><a href="#model中-pt-和-yaml-的区别" class="headerlink" title="model中 .pt 和 .yaml 的区别"></a>model中 .pt 和 .yaml 的区别</h3><ul>
+<li>.pt 是指从预训练模型的基础上进行训练。若我们选择 yolov8n.pt这种.pt类型的文件，其实里面是包含了模型的结构和训练好的参数的，也就是说拿来就可以用，就已经具备了检测目标的能力了，yolov8n.pt能检测coco中的80个类别。假设你要检测不同种类的狗，那么yolov8n.pt原本可以检测狗的能力对你训练应该是有帮助的，你只需要在此基础上提升其对不同狗的鉴别能力即可。但如果你需要检测的类别不在其中，例如口罩检测，那么就帮助不大。</li>
+<li>.yaml是从零开始训练</li>
+</ul>
+<h3 id="data"><a href="#data" class="headerlink" title="data"></a>data</h3><p>指定数据集文件的位置，数据集包含训练和验证的图像、标签</p>
+<p>.yaml的配置样例如下</p>
+<div class="highlight-container" data-rel="Yaml"><figure class="iseeu highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">path:</span> <span class="string">../datasets/coco128</span>  <span class="comment"># dataset root dir 数据集得根目录</span></span><br><span class="line"><span class="attr">train:</span> <span class="string">images/train2017</span>  <span class="comment"># train images (relative to &#x27;path&#x27;) 128 images 训练图片的文件夹</span></span><br><span class="line"><span class="attr">val:</span> <span class="string">images/train2017</span>  <span class="comment"># val images (relative to &#x27;path&#x27;) 128 images 训练图标的标签的文件夹</span></span><br><span class="line"><span class="attr">test:</span>  <span class="comment"># test images (optional)</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Classes</span></span><br><span class="line"><span class="attr">nc:</span> <span class="number">2</span>  <span class="comment"># number of classes</span></span><br><span class="line"><span class="attr">names:</span> </span><br><span class="line">	<span class="attr">0:</span> <span class="string">class1</span></span><br><span class="line">	<span class="attr">1:</span> <span class="string">class2</span></span><br><span class="line"><span class="comment"># class names</span></span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+
+<h3 id="脚本"><a href="#脚本" class="headerlink" title="脚本"></a>脚本</h3><p>编写一个 .py 文件用于训练</p>
+<div class="highlight-container" data-rel="Python"><figure class="iseeu highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> ultralytics <span class="keyword">import</span> YOLO</span><br><span class="line"></span><br><span class="line"><span class="comment"># 加载模型</span></span><br><span class="line">model = YOLO(<span class="string">&#x27;yolov8n.yaml&#x27;</span>)  <span class="comment"># 从yaml文件加载</span></span><br><span class="line">model = YOLO(<span class="string">&#x27;yolov8n.pt&#x27;</span>)  <span class="comment"># 加载预训练模型</span></span><br><span class="line">model = YOLO(<span class="string">&#x27;yolov8n.yaml&#x27;</span>).load(<span class="string">&#x27;yolov8n.pt&#x27;</span>)  <span class="comment"># 从 YAML加载 然后再加载权重</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 指定训练参数开始训练</span></span><br><span class="line">model.train(data=<span class="string">&#x27;coco128.yaml&#x27;</span>, epochs=<span class="number">100</span>, imgsz=<span class="number">640</span>)</span><br></pre></td></tr></table></figure></div>
+
+<h3 id="命令行"><a href="#命令行" class="headerlink" title="命令行"></a>命令行</h3><p>直接在 yolov8 环境下的命令行执行</p>
+<div class="highlight-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">从YAML构建新模型，从头开始训练</span></span><br><span class="line">yolo detect train data=coco128.yaml model=yolov8n.yaml epochs=100 imgsz=640</span><br><span class="line"><span class="meta prompt_"> </span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">从预训练*.pt模型开始训练</span></span><br><span class="line">yolo detect train data=coco128.yaml model=yolov8n.pt epochs=100 imgsz=640</span><br><span class="line"><span class="meta prompt_"> </span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">从YAML构建一个新模型，转移预训练权重，然后开始训练</span></span><br><span class="line">yolo detect train data=coco128.yaml model=yolov8n.yaml pretrained=yolov8n.pt epochs=100 imgsz=640</span><br></pre></td></tr></table></figure></div>
+
+<h2 id="结果"><a href="#结果" class="headerlink" title="结果"></a>结果</h2><p>(忽略我拿 CPU 跑的1个半小时)</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://img2.imgtp.com/2024/03/26/zleyyLZH.png"
+                      alt="07"
+                ></p>
+<p>结果的模型保存在 runs&#x2F;detect 内，包含最后一次的模型和效果最好的模型，至此训练完成</p>
+<h3 id="参数说明"><a href="#参数说明" class="headerlink" title="参数说明"></a>参数说明</h3><p>训练命令的参数如下所示，可根据自身需求更改</p>
+<table>
+<thead>
+<tr>
+<th>参数名</th>
+<th>默认值&#x2F;设置</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>model</td>
+<td>None</td>
+<td>模型文件路径，例如 yolov8n.pt, yolov8n.yaml</td>
+</tr>
+<tr>
+<td>data</td>
+<td>None</td>
+<td>数据文件路径，例如 coco128.yaml</td>
+</tr>
+<tr>
+<td>epochs</td>
+<td>100</td>
+<td>训练的轮次数量</td>
+</tr>
+<tr>
+<td>patience</td>
+<td>50</td>
+<td>早停训练的等待轮次</td>
+</tr>
+<tr>
+<td>batch</td>
+<td>16</td>
+<td>每批图像数量</td>
+</tr>
+<tr>
+<td>imgsz</td>
+<td>640</td>
+<td>输入图像的大小，以整数表示</td>
+</tr>
+<tr>
+<td>save</td>
+<td>True</td>
+<td>保存训练检查点和预测结果</td>
+</tr>
+<tr>
+<td>save_period</td>
+<td>-1</td>
+<td>每x轮次保存检查点</td>
+</tr>
+<tr>
+<td>cache</td>
+<td>False</td>
+<td>使用缓存加载数据</td>
+</tr>
+<tr>
+<td>device</td>
+<td>None</td>
+<td>运行设备，例如 cuda device&#x3D;0 或 device&#x3D;0,1,2,3 或 device&#x3D;cpu</td>
+</tr>
+<tr>
+<td>workers</td>
+<td>8</td>
+<td>数据加载的工作线程数</td>
+</tr>
+<tr>
+<td>pretrained</td>
+<td>True</td>
+<td>（bool 或 str）是否使用预训练模型（bool）或从中加载权重的模型（str）</td>
+</tr>
+<tr>
+<td>optimizer</td>
+<td>‘auto’</td>
+<td>使用的优化器，选择范围&#x3D;[SGD, Adam, Adamax, AdamW, NAdam, RAdam, RMSProp, auto]</td>
+</tr>
+<tr>
+<td>verbose</td>
+<td>False</td>
+<td>是否打印详细输出</td>
+</tr>
+<tr>
+<td>seed</td>
+<td>0</td>
+<td>随机种子，用于可重复性</td>
+</tr>
+<tr>
+<td>deterministic</td>
+<td>True</td>
+<td>是否启用确定性模式</td>
+</tr>
+<tr>
+<td>single_cls</td>
+<td>False</td>
+<td>将多类数据作为单类训练</td>
+</tr>
+<tr>
+<td>rect</td>
+<td>False</td>
+<td>矩形训练，每批为最小填充整合</td>
+</tr>
+<tr>
+<td>cos_lr</td>
+<td>False</td>
+<td>使用余弦学习率调度器</td>
+</tr>
+<tr>
+<td>close_mosaic</td>
+<td>10</td>
+<td>(int) 最后轮次禁用马赛克增强（0为禁用）</td>
+</tr>
+<tr>
+<td>resume</td>
+<td>False</td>
+<td>从最后检查点恢复训练</td>
+</tr>
+<tr>
+<td>amp</td>
+<td>True</td>
+<td>自动混合精度（AMP）训练，选择范围&#x3D;[True, False]</td>
+</tr>
+<tr>
+<td>fraction</td>
+<td>1.0</td>
+<td>训练的数据集比例（默认为1.0，即训练集中的所有图像）</td>
+</tr>
+<tr>
+<td>profile</td>
+<td>False</td>
+<td>在训练期间为记录器分析ONNX和TensorRT速度</td>
+</tr>
+<tr>
+<td>freeze</td>
+<td>None</td>
+<td>(int 或 list, 可选) 在训练期间冻结前n层，或冻结层索引列表</td>
+</tr>
+<tr>
+<td>lr0</td>
+<td>0.01</td>
+<td>初始学习率（例如 SGD&#x3D;1E-2, Adam&#x3D;1E-3）</td>
+</tr>
+<tr>
+<td>lrf</td>
+<td>0.01</td>
+<td>最终学习率 (lr0 * lrf)</td>
+</tr>
+<tr>
+<td>momentum</td>
+<td>0.937</td>
+<td>SGD动量&#x2F;Adam beta1</td>
+</tr>
+<tr>
+<td>weight_decay</td>
+<td>0.0005</td>
+<td>优化器权重衰减5e-4</td>
+</tr>
+<tr>
+<td>warmup_epochs</td>
+<td>3.0</td>
+<td>热身轮次（小数ok）</td>
+</tr>
+<tr>
+<td>warmup_momentum</td>
+<td>0.8</td>
+<td>热身初始动量</td>
+</tr>
+<tr>
+<td>warmup_bias_lr</td>
+<td>0.1</td>
+<td>热身初始偏差lr</td>
+</tr>
+<tr>
+<td>box</td>
+<td>7.5</td>
+<td>框损失增益</td>
+</tr>
+<tr>
+<td>cls</td>
+<td>0.5</td>
+<td>cls损失增益（根据像素缩放）</td>
+</tr>
+<tr>
+<td>dfl</td>
+<td>1.5</td>
+<td>dfl损失增益</td>
+</tr>
+<tr>
+<td>pose</td>
+<td>12.0</td>
+<td>姿态损失增益（仅限姿态）</td>
+</tr>
+<tr>
+<td>kobj</td>
+<td>2.0</td>
+<td>关键点obj损失增益（仅限姿态）</td>
+</tr>
+<tr>
+<td>label_smoothing</td>
+<td>0.0</td>
+<td>标签平滑（小数）</td>
+</tr>
+<tr>
+<td>nbs</td>
+<td>64</td>
+<td>标称批大小</td>
+</tr>
+<tr>
+<td>overlap_mask</td>
+<td>True</td>
+<td>训练期间掩码应重叠（仅限分割训练）</td>
+</tr>
+<tr>
+<td>mask_ratio</td>
+<td>4</td>
+<td>掩码降采样比率（仅限分割训练）</td>
+</tr>
+<tr>
+<td>dropout</td>
+<td>0.0</td>
+<td>使用dropout正则化（仅限分类训练）</td>
+</tr>
+<tr>
+<td>val</td>
+<td>True</td>
+<td>训练期间验证&#x2F;测试</td>
+</tr>
+</tbody></table>
+]]></content>
+      <categories>
+        <category>技术记录</category>
+      </categories>
+  </entry>
 </search>
