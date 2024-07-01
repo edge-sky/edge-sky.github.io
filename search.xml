@@ -32,8 +32,12 @@
 <p>参考：<a class="link"   href="https://huanghaoh.gitee.io/posts/b4d39b7f/" >Hexo 插件 hexo-all-minifier 的异常处理 | Huanghao’s blog (gitee.io) <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
 ]]></content>
       <categories>
-        <category>踩坑记录</category>
+        <category>Hexo</category>
       </categories>
+      <tags>
+        <tag>踩坑记录</tag>
+        <tag>技术记录</tag>
+      </tags>
   </entry>
   <entry>
     <title>nginx 禁止 ip 直接访问，放行域名请求</title>
@@ -51,8 +55,11 @@
 <p>重启 nginx，你就会发现ip直接访问会得到403错误码，放行的域名可正常访问</p>
 ]]></content>
       <categories>
-        <category>技术记录</category>
+        <category>nginx</category>
       </categories>
+      <tags>
+        <tag>技术记录</tag>
+      </tags>
   </entry>
   <entry>
     <title>YOLOV8环境配置速通</title>
@@ -415,8 +422,13 @@
 </tbody></table>
 ]]></content>
       <categories>
-        <category>技术记录</category>
+        <category>YOLO</category>
       </categories>
+      <tags>
+        <tag>踩坑记录</tag>
+        <tag>技术记录</tag>
+        <tag>YOLO</tag>
+      </tags>
   </entry>
   <entry>
     <title>RecycleView使用指北</title>
@@ -438,8 +450,11 @@
 ]]></content>
       <categories>
         <category>Android</category>
-        <category>踩坑记录</category>
       </categories>
+      <tags>
+        <tag>踩坑记录</tag>
+        <tag>Android</tag>
+      </tags>
   </entry>
   <entry>
     <title>MainActivity 简单编写</title>
@@ -452,6 +467,11 @@
       <categories>
         <category>Android</category>
       </categories>
+      <tags>
+        <tag>踩坑记录</tag>
+        <tag>Android</tag>
+        <tag>技术记录</tag>
+      </tags>
   </entry>
   <entry>
     <title>MainActivity 简单编写</title>
@@ -473,6 +493,9 @@
       <categories>
         <category>Android</category>
       </categories>
+      <tags>
+        <tag>Android</tag>
+      </tags>
   </entry>
   <entry>
     <title>MVC 和 MVP 的区别</title>
@@ -483,8 +506,11 @@
 ]]></content>
       <categories>
         <category>Android</category>
-        <category>技术记录</category>
       </categories>
+      <tags>
+        <tag>踩坑记录</tag>
+        <tag>Android</tag>
+      </tags>
   </entry>
   <entry>
     <title>浅记安卓蓝牙开发</title>
@@ -516,8 +542,11 @@
 ]]></content>
       <categories>
         <category>Android</category>
-        <category>技术记录</category>
       </categories>
+      <tags>
+        <tag>Android</tag>
+        <tag>技术记录</tag>
+      </tags>
   </entry>
   <entry>
     <title>安卓页面转跳</title>
@@ -529,7 +558,98 @@
 ]]></content>
       <categories>
         <category>Android</category>
-        <category>踩坑记录</category>
       </categories>
+      <tags>
+        <tag>踩坑记录</tag>
+        <tag>Android</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Mybatis 在 java 中的使用</title>
+    <url>/2024/07/01/MyBatis/</url>
+    <content><![CDATA[<h1 id="构建"><a href="#构建" class="headerlink" title="构建"></a>构建</h1><h3 id="maven"><a href="#maven" class="headerlink" title="maven"></a>maven</h3><div class="highlight-container" data-rel="Xml"><figure class="iseeu highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.mybatis<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mybatis<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.5.11<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure></div>
+
+<h3 id="SQLMap-xml（位于resources中）"><a href="#SQLMap-xml（位于resources中）" class="headerlink" title="SQLMap.xml（位于resources中）"></a>SQLMap.xml（位于resources中）</h3><div class="highlight-container" data-rel="Xml"><figure class="iseeu highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=<span class="string">&quot;1.0&quot;</span> encoding=<span class="string">&quot;UTF-8&quot;</span> ?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">configuration</span></span></span><br><span class="line"><span class="meta">        <span class="keyword">PUBLIC</span> <span class="string">&quot;-//mybatis.org//DTD Config 3.0//EN&quot;</span></span></span><br><span class="line"><span class="meta">        <span class="string">&quot;http://mybatis.org/dtd/mybatis-3-config.dtd&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">environments</span> <span class="attr">default</span>=<span class="string">&quot;mysqlEnv&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">environment</span> <span class="attr">id</span>=<span class="string">&quot;mysqlEnv&quot;</span>&gt;</span></span><br><span class="line">            <span class="comment">&lt;!-- 事务管理器 --&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">transactionManager</span> <span class="attr">type</span>=<span class="string">&quot;JDBC&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">            <span class="tag">&lt;/<span class="name">transactionManager</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">dataSource</span> <span class="attr">type</span>=<span class="string">&quot;POOLED&quot;</span>&gt;</span></span><br><span class="line">                <span class="comment">&lt;!-- 数据库信息 --&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;driver&quot;</span> <span class="attr">value</span>=<span class="string">&quot;com.mysql.cj.jdbc.Driver&quot;</span>/&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;url&quot;</span> <span class="attr">value</span>=<span class="string">&quot;jdbc:mysql://localhost:3306/lut&quot;</span>/&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;username&quot;</span> <span class="attr">value</span>=<span class="string">&quot;root&quot;</span>/&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;password&quot;</span> <span class="attr">value</span>=<span class="string">&quot;root&quot;</span>/&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">dataSource</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">environment</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">environments</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!-- 映射器 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">mappers</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">mapper</span> <span class="attr">resource</span>=<span class="string">&quot;ObjectMap.xml&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">mappers</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br></pre></td></tr></table></figure></div>
+
+<h3 id="ObjectMap-xml（位于resource中）"><a href="#ObjectMap-xml（位于resource中）" class="headerlink" title="ObjectMap.xml（位于resource中）"></a>ObjectMap.xml（位于resource中）</h3><p>映射配置</p>
+<div class="highlight-container" data-rel="Xml"><figure class="iseeu highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=<span class="string">&quot;1.0&quot;</span> encoding=<span class="string">&quot;UTF-8&quot;</span> ?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">mapper</span></span></span><br><span class="line"><span class="meta">        <span class="keyword">PUBLIC</span> <span class="string">&quot;-//mybatis.org//DTD Mapper 3.0//EN&quot;</span></span></span><br><span class="line"><span class="meta">        <span class="string">&quot;http://mybatis.org/dtd/mybatis-3-mapper.dtd&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">mapper</span> <span class="attr">namespace</span>=<span class="string">&quot;ObjectMapper&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">insert</span> <span class="attr">id</span>=<span class="string">&quot;相应的Mapper方法名&quot;</span>&gt;</span></span><br><span class="line">        sql</span><br><span class="line">        // insert into student (name, address, email) values (#&#123;name&#125;, #&#123;address&#125;, #&#123;email&#125;)</span><br><span class="line">        占位符为#&#123;变量名，若传入对象，必须符合getter和setter规范，如以上中对应方法为：getName, getAddress, getEmail&#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">insert</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">&quot;相应的Mapper方法名&quot;</span> <span class="attr">resultType</span>=<span class="string">&quot;返回的类型，即反射对象&quot;</span>&gt;</span></span><br><span class="line">        sql</span><br><span class="line">    <span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">delete</span> <span class="attr">id</span>=<span class="string">&quot;相应的Mapper方法名&quot;</span>&gt;</span></span><br><span class="line">        sql</span><br><span class="line">    <span class="tag">&lt;/<span class="name">delete</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">update</span> <span class="attr">id</span>=<span class="string">&quot;相应的Mapper方法名&quot;</span>&gt;</span></span><br><span class="line">		sql</span><br><span class="line">    <span class="tag">&lt;/<span class="name">update</span>&gt;</span>	</span><br><span class="line"><span class="tag">&lt;/<span class="name">mapper</span>&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+
+<h3 id="ObjectMapper-java（interface接口）"><a href="#ObjectMapper-java（interface接口）" class="headerlink" title="ObjectMapper.java（interface接口）"></a>ObjectMapper.java（interface接口）</h3><p>通过调用此类进行操作</p>
+<div class="highlight-container" data-rel="Java"><figure class="iseeu highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">ObjectMapper</span> &#123;</span><br><span class="line">    返回类型 Mapper方法名(参数);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+]]></content>
+      <categories>
+        <category>Mybatis</category>
+      </categories>
+      <tags>
+        <tag>技术记录</tag>
+        <tag>Mybatis</tag>
+        <tag>Java</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>使用 clip-path 实现 Web 滑动条</title>
+    <url>/2023/12/30/clip-path%E7%9A%84%E4%BD%BF%E7%94%A8/</url>
+    <content><![CDATA[<p><code>clip-path</code>属性可以创建一个只有部分可见的元素</p>
+<div class="highlight-container" data-rel="Css"><figure class="iseeu highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.white-text</span> &#123;</span><br><span class="line">    <span class="attribute">position</span>: absolute;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">    <span class="attribute">text-align</span>: center;</span><br><span class="line">    <span class="attribute">line-height</span>: <span class="number">30px</span>;</span><br><span class="line">    <span class="attribute">pointer-events</span>: none;</span><br><span class="line">    <span class="attribute">color</span>: white;</span><br><span class="line">    <span class="attribute">z-index</span>: <span class="number">3</span>;</span><br><span class="line">    <span class="attribute">clip-path</span>: <span class="built_in">inset</span>(<span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+<p>在这个例子中，<strong>white-text</strong>样式添加了一个属性：clip-path，inset(0, 0, 0, 0)参数定义了一个剪切区域，上、右、下、左四个边的剪切距离</p>
+<div class="highlight-container" data-rel="Html"><figure class="iseeu highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;white-text&quot;</span> <span class="attr">id</span>=<span class="string">&quot;progressText1&quot;</span>&gt;</span>0%<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure></div>
+
+<div class="highlight-container" data-rel="Js"><figure class="iseeu highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">updateProgressBar</span>(<span class="params">e</span>) &#123;</span><br><span class="line">        <span class="keyword">let</span> bounds = progressContainer.<span class="title function_">getBoundingClientRect</span>();</span><br><span class="line">        <span class="keyword">let</span> x = e.<span class="property">pageX</span> - bounds.<span class="property">left</span>;</span><br><span class="line">        <span class="keyword">let</span> percentage = <span class="title class_">Math</span>.<span class="title function_">max</span>(<span class="number">0</span>, <span class="title class_">Math</span>.<span class="title function_">min</span>(<span class="number">100</span>, (x / bounds.<span class="property">width</span>) * <span class="number">100</span>));</span><br><span class="line">        <span class="keyword">let</span> text = <span class="title class_">Math</span>.<span class="title function_">round</span>(percentage) + <span class="string">&#x27;%&#x27;</span>;</span><br><span class="line">        progressBar.<span class="property">style</span>.<span class="property">width</span> = percentage + <span class="string">&#x27;%&#x27;</span>;</span><br><span class="line">        progressMask.<span class="property">style</span>.<span class="property">width</span> = <span class="number">100</span> - percentage + <span class="string">&#x27;%&#x27;</span>;</span><br><span class="line">        progressText1.<span class="property">textContent</span> = text;</span><br><span class="line">        progressText1.<span class="property">style</span>.<span class="property">clipPath</span> = <span class="string">`inset(0 <span class="subst">$&#123;<span class="number">100</span> - percentage&#125;</span>% 0 0)`</span>;</span><br><span class="line">        progressText2.<span class="property">textContent</span> = text;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></div>
+
+<p>右边的剪切距离为<code>100 - percentage</code>%，表示其显示区域与进度条一致，当进度条覆盖黑色文本时白色文本相应的显示出来，实现了变色的效果</p>
+]]></content>
+      <categories>
+        <category>Web</category>
+      </categories>
+      <tags>
+        <tag>技术记录</tag>
+        <tag>Web</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>关于CSS中scroll--snap未生效</title>
+    <url>/2024/05/19/%E5%85%B3%E4%BA%8E%20CSS%20%E4%B8%AD%20scroll-snap%20%E6%9C%AA%E7%94%9F%E6%95%88/</url>
+    <content><![CDATA[<h2 id="CSS中scroll–snap未生效"><a href="#CSS中scroll–snap未生效" class="headerlink" title="CSS中scroll–snap未生效"></a>CSS中scroll–snap未生效</h2><div class="highlight-container" data-rel="Html"><figure class="iseeu highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;header&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;container&quot;</span> <span class="attr">class</span>=<span class="string">&quot;container&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;page1&quot;</span> <span class="attr">class</span>=<span class="string">&quot;pages&quot;</span> <span class="attr">style</span>=<span class="string">&quot;background-color: aqua&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;page2&quot;</span> <span class="attr">class</span>=<span class="string">&quot;pages&quot;</span> <span class="attr">style</span>=<span class="string">&quot;background-color: #3c71b5&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;page3&quot;</span> <span class="attr">class</span>=<span class="string">&quot;pages&quot;</span> <span class="attr">style</span>=<span class="string">&quot;background-color: #2422bf&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure></div>
+
+<div class="highlight-container" data-rel="Css"><figure class="iseeu highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.pages</span> &#123;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">100vh</span>;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">    <span class="attribute">scroll-snap-align</span>: start;</span><br><span class="line">    <span class="attribute">scroll-snap-stop</span>: always;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.container</span> &#123;</span><br><span class="line">    <span class="attribute">scroll-snap-type</span>: y mandatory;</span><br><span class="line">    <span class="attribute">overflow-y</span>: auto;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p>此时F12发现有吸附点，但并没有吸附，原因是直接父容器没有给予高度</p>
+<h2 id="实现！！"><a href="#实现！！" class="headerlink" title="实现！！"></a>实现！！</h2><div class="highlight-container" data-rel="Css"><figure class="iseeu highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.pages</span> &#123;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">100vh</span>;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">    <span class="attribute">scroll-snap-align</span>: start;</span><br><span class="line">    <span class="attribute">scroll-snap-stop</span>: always;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.container</span> &#123;</span><br><span class="line">    <span class="attribute">scroll-snap-type</span>: y mandatory;</span><br><span class="line">    <span class="attribute">overflow-y</span>: auto;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">100vh</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+]]></content>
+      <categories>
+        <category>Web</category>
+      </categories>
+      <tags>
+        <tag>踩坑记录</tag>
+        <tag>Web</tag>
+        <tag>CSS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>web 实现滑动阻尼</title>
+    <url>/2024/05/20/%E6%BB%91%E5%8A%A8%E9%98%BB%E5%B0%BC/</url>
+    <content><![CDATA[<h1 id="原生-JS-实现"><a href="#原生-JS-实现" class="headerlink" title="原生 JS 实现"></a>原生 JS 实现</h1><h2 id="首先需要禁用滚轮对网页的滚动"><a href="#首先需要禁用滚轮对网页的滚动" class="headerlink" title="首先需要禁用滚轮对网页的滚动"></a>首先需要禁用滚轮对网页的滚动</h2><div class="highlight-container" data-rel="Js"><figure class="iseeu highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 一个指向 DOM 的函数</span></span><br><span class="line"><span class="keyword">const</span> el = <span class="variable language_">document</span>.<span class="property">documentElement</span></span><br><span class="line"><span class="comment">// 定义一个函数，用于禁用默认时间</span></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">onWheel</span> = (<span class="params">e</span>) =&gt; &#123;</span><br><span class="line">    e.<span class="title function_">preventDefault</span>(); <span class="comment">// 阻止默认事件，停止滚动</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 在 DOM 上添加滚轮的监听器，触发 onWheel 函数</span></span><br><span class="line"><span class="comment">// 添加 passive: false 表示该监听器不是被动监听器，防止方法不生效</span></span><br><span class="line">el.<span class="title function_">addEventListener</span>(<span class="string">&#x27;wheel&#x27;</span>, onWheel, &#123; <span class="attr">passive</span>: <span class="literal">false</span> &#125;); </span><br></pre></td></tr></table></figure></div>
+
+<h2 id="绘制帧函数"><a href="#绘制帧函数" class="headerlink" title="绘制帧函数"></a>绘制帧函数</h2><div class="highlight-container" data-rel="Js"><figure class="iseeu highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Silky</span> &#123;</span><br><span class="line">  timeRecord = <span class="number">0</span> <span class="comment">// 回调时间记录</span></span><br><span class="line"></span><br><span class="line">  <span class="title function_">constructor</span>(<span class="params">&#123; content &#125; = &#123;&#125;</span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">content</span> = content || <span class="variable language_">document</span>.<span class="property">documentElement</span></span><br><span class="line">    <span class="keyword">const</span> <span class="title function_">onWeel</span> = (<span class="params">e</span>) =&gt; &#123;</span><br><span class="line">      e.<span class="title function_">preventDefault</span>(); <span class="comment">// 阻止默认事件，停止滚动</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">content</span>.<span class="title function_">addEventListener</span>(<span class="string">&#x27;wheel&#x27;</span>, onWeel, &#123; <span class="attr">passive</span>: <span class="literal">false</span> &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="title function_">raf</span>(<span class="params">time</span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> deltaTime = time - (<span class="variable language_">this</span>.<span class="property">timeRecord</span> || time);</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">timeRecord</span> = time;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(deltaTime * <span class="number">0.001</span>) <span class="comment">// 单位转化为秒，该值后面计算时会用到</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 创建一个实例</span></span><br><span class="line"><span class="keyword">const</span> silky = <span class="keyword">new</span> <span class="title class_">Silky</span>(&#123;&lt;这里可以传入容器元素&gt;&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 循环绘制动画</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">raf</span>(<span class="params">time</span>) &#123;</span><br><span class="line">  silky.<span class="title function_">raf</span>(time);</span><br><span class="line">  <span class="title function_">requestAnimationFrame</span>(raf);</span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_">requestAnimationFrame</span>(raf);</span><br></pre></td></tr></table></figure></div>
+
+<h2 id="实现虚拟滚动来代替鼠标滚动"><a href="#实现虚拟滚动来代替鼠标滚动" class="headerlink" title="实现虚拟滚动来代替鼠标滚动"></a>实现虚拟滚动来代替鼠标滚动</h2><div class="highlight-container" data-rel="Js"><figure class="iseeu highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 在 Silky 添加一下参数和方法</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Silky</span> &#123;</span><br><span class="line">  timeRecord = <span class="number">0</span> <span class="comment">// 回调时间记录</span></span><br><span class="line">  targetScroll = <span class="number">0</span> <span class="comment">// 当前滚动位置</span></span><br><span class="line">  animatedScroll = <span class="number">0</span> <span class="comment">// 动画滚动位置</span></span><br><span class="line">  <span class="keyword">from</span> = <span class="number">0</span> <span class="comment">// 记录起始位置</span></span><br><span class="line">  to = <span class="number">0</span> <span class="comment">// 记录目标位置</span></span><br><span class="line">  ........</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 虚拟滚动方法</span></span><br><span class="line">  <span class="title function_">onVirtualScroll</span>(<span class="params">target</span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">to</span> = target;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">onUpdate</span> = <span class="function">(<span class="params">value</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="variable language_">this</span>.<span class="property">animatedScroll</span> = value; <span class="comment">// 记录动画距离</span></span><br><span class="line">      <span class="variable language_">this</span>.<span class="property">content</span>.<span class="property">scrollTop</span> = <span class="variable language_">this</span>.<span class="property">animatedScroll</span>; <span class="comment">// 设置滚动</span></span><br><span class="line">      <span class="variable language_">this</span>.<span class="property">targetScroll</span> = value; <span class="comment">// 记录滚动后的距离</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p>在滚动时间中调用 onVirtualScroll</p>
+<div class="highlight-container" data-rel="Js"><figure class="iseeu highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title function_">onWeel</span> = (<span class="params">e</span>) =&gt; &#123;</span><br><span class="line">    e.<span class="title function_">preventDefault</span>(); <span class="comment">// 阻止默认事件，停止滚动</span></span><br><span class="line">    <span class="variable language_">this</span>.<span class="title function_">onVirtualScroll</span>(<span class="variable language_">this</span>.<span class="property">targetScroll</span> + e.<span class="property">deltaY</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p>添加 advance 方法，用于更新视图</p>
+<div class="highlight-container" data-rel="Js"><figure class="iseeu highlight js"><table><tr><td class="code"><pre><span class="line"><span class="title function_">raf</span>(<span class="params">time</span>) &#123;</span><br><span class="line">  ......</span><br><span class="line">  <span class="variable language_">this</span>.<span class="title function_">advance</span>()</span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_">advance</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> value = <span class="variable language_">this</span>.<span class="property">to</span></span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">onUpdate</span>?.(value);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<h2 id="线性插值实现阻尼感"><a href="#线性插值实现阻尼感" class="headerlink" title="线性插值实现阻尼感"></a>线性插值实现阻尼感</h2>]]></content>
+      <categories>
+        <category>Web</category>
+      </categories>
+      <tags>
+        <tag>踩坑记录</tag>
+        <tag>技术记录</tag>
+        <tag>Web</tag>
+      </tags>
   </entry>
 </search>
