@@ -1,0 +1,655 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>Hexo性能优化</title>
+    <url>/2024/03/12/Hexo%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/</url>
+    <content><![CDATA[<h1 id="HEXO-性能优化及-hexo-all-minifier-无法安装"><a href="#HEXO-性能优化及-hexo-all-minifier-无法安装" class="headerlink" title="HEXO 性能优化及 hexo-all-minifier 无法安装"></a>HEXO 性能优化及 hexo-all-minifier 无法安装</h1><p>使用 hexo-all-minifier 插件，依照作者描述，该插件集合了</p>
+<ul>
+<li>hexo-html-minifier</li>
+<li>hexo-clean-css</li>
+<li>hexo-uglify</li>
+<li>hexo-imagemin</li>
+</ul>
+<p>可有效减少静态网页的体积</p>
+<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">npm install hexo-all-minifier --save</span><br></pre></td></tr></table></figure></div>
+
+<p>可能报错，大概是证书无法验证或是啥啥啥找不到，估计是网络问题，执行</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">npm install hexo-all-minifier --save --ignore-scripts</span><br></pre></td></tr></table></figure></div>
+
+<p>强行安装</p>
+<p>看似安装完成后，进行hexo g编译，又会报错，大概是缺少一个叫 optipng.exe 的组件，两个方法</p>
+<ol>
+<li>禁用图片压缩</li>
+</ol>
+<div class="highlight-container" data-rel="Yaml"><figure class="iseeu highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">image_minifier:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">false</span></span><br><span class="line">  <span class="attr">interlaced:</span> <span class="literal">false</span></span><br><span class="line">  <span class="attr">multipass:</span> <span class="literal">false</span></span><br><span class="line">  <span class="attr">optimizationLevel:</span> <span class="number">2</span></span><br><span class="line">  <span class="attr">pngquant:</span> <span class="literal">false</span></span><br><span class="line">  <span class="attr">progressive:</span> <span class="literal">false</span></span><br><span class="line">  <span class="attr">silent:</span> <span class="literal">false</span></span><br></pre></td></tr></table></figure></div>
+
+<ol start="2">
+<li>手动下载 optipng.exe 放在 node_modules&#x2F;optipng-bin&#x2F;vendor 下，注意不是 node_modules&#x2F;optipng-bin&#x2F;vendor&#x2F;source 下</li>
+</ol>
+<p>如果你的资源文件中有.jpg文件，很有可能又会报 EOF 错</p>
+<p>在 .\node_modules\hexo-all-minifier\lib\optimizeImage.js 将 <code>let targetfile = [&#39;jpg&#39;, &#39;gif&#39;, &#39;png&#39;, &#39;svg&#39;];</code> 修改为 &#96;let targetfile &#x3D; [‘jpeg’, ‘gif’, ‘png’, ‘svg’];</p>
+<p>但似乎就不能压缩jpg了，如果你把 jpg 的后缀改为 jepg，又会报错（真奇怪</p>
+<p>参考：<a class="link"   href="https://huanghaoh.gitee.io/posts/b4d39b7f/" >Hexo 插件 hexo-all-minifier 的异常处理 | Huanghao’s blog (gitee.io) <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+]]></content>
+      <categories>
+        <category>Hexo</category>
+      </categories>
+      <tags>
+        <tag>踩坑记录</tag>
+        <tag>技术记录</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>MainActivity 简单编写</title>
+    <url>/2024/05/30/MainActivity/</url>
+    <content><![CDATA[<div class="highlight-container" data-rel="Kotlin"><figure class="iseeu highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="comment">// MainActivity 继承 AppCompatActivity()</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MainActivity</span> : <span class="type">AppCompatActivity</span>() &#123;</span><br><span class="line">    <span class="comment">// 对onCreate方法进行重写，以设定应用打开的界面，Bundle类型的参数savedInstanceState用于保存和恢复Activity的状态。</span></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onCreate</span><span class="params">(savedInstanceState: <span class="type">Bundle</span>?)</span></span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState)<span class="comment">// 调用父类方法初始化页面</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 使页面为边到边，说人话就是能用上所有的屏幕面积，不会被系统UI打扰，实现沉浸化</span></span><br><span class="line">        enableEdgeToEdge()</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 将布局文件activity_main.xml设置为Activity的界面布局</span></span><br><span class="line">        setContentView(R.layout.activity_main)</span><br><span class="line">        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) &#123; v, insets -&gt;</span><br><span class="line">            <span class="keyword">val</span> systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())</span><br><span class="line">            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)</span><br><span class="line">            insets</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+
+
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+      <tags>
+        <tag>踩坑记录</tag>
+        <tag>技术记录</tag>
+        <tag>Android</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Mybatis 在 java 中的使用</title>
+    <url>/2024/07/01/MyBatis/</url>
+    <content><![CDATA[<h1 id="构建"><a href="#构建" class="headerlink" title="构建"></a>构建</h1><h3 id="maven"><a href="#maven" class="headerlink" title="maven"></a>maven</h3><div class="highlight-container" data-rel="Xml"><figure class="iseeu highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.mybatis<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mybatis<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.5.11<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure></div>
+
+<h3 id="SQLMap-xml（位于resources中）"><a href="#SQLMap-xml（位于resources中）" class="headerlink" title="SQLMap.xml（位于resources中）"></a>SQLMap.xml（位于resources中）</h3><div class="highlight-container" data-rel="Xml"><figure class="iseeu highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=<span class="string">&quot;1.0&quot;</span> encoding=<span class="string">&quot;UTF-8&quot;</span> ?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">configuration</span></span></span><br><span class="line"><span class="meta">        <span class="keyword">PUBLIC</span> <span class="string">&quot;-//mybatis.org//DTD Config 3.0//EN&quot;</span></span></span><br><span class="line"><span class="meta">        <span class="string">&quot;http://mybatis.org/dtd/mybatis-3-config.dtd&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">environments</span> <span class="attr">default</span>=<span class="string">&quot;mysqlEnv&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">environment</span> <span class="attr">id</span>=<span class="string">&quot;mysqlEnv&quot;</span>&gt;</span></span><br><span class="line">            <span class="comment">&lt;!-- 事务管理器 --&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">transactionManager</span> <span class="attr">type</span>=<span class="string">&quot;JDBC&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">            <span class="tag">&lt;/<span class="name">transactionManager</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">dataSource</span> <span class="attr">type</span>=<span class="string">&quot;POOLED&quot;</span>&gt;</span></span><br><span class="line">                <span class="comment">&lt;!-- 数据库信息 --&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;driver&quot;</span> <span class="attr">value</span>=<span class="string">&quot;com.mysql.cj.jdbc.Driver&quot;</span>/&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;url&quot;</span> <span class="attr">value</span>=<span class="string">&quot;jdbc:mysql://localhost:3306/lut&quot;</span>/&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;username&quot;</span> <span class="attr">value</span>=<span class="string">&quot;root&quot;</span>/&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;password&quot;</span> <span class="attr">value</span>=<span class="string">&quot;root&quot;</span>/&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">dataSource</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">environment</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">environments</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!-- 映射器 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">mappers</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">mapper</span> <span class="attr">resource</span>=<span class="string">&quot;ObjectMap.xml&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">mappers</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br></pre></td></tr></table></figure></div>
+
+<h3 id="ObjectMap-xml（位于resource中）"><a href="#ObjectMap-xml（位于resource中）" class="headerlink" title="ObjectMap.xml（位于resource中）"></a>ObjectMap.xml（位于resource中）</h3><p>映射配置</p>
+<div class="highlight-container" data-rel="Xml"><figure class="iseeu highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=<span class="string">&quot;1.0&quot;</span> encoding=<span class="string">&quot;UTF-8&quot;</span> ?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">mapper</span></span></span><br><span class="line"><span class="meta">        <span class="keyword">PUBLIC</span> <span class="string">&quot;-//mybatis.org//DTD Mapper 3.0//EN&quot;</span></span></span><br><span class="line"><span class="meta">        <span class="string">&quot;http://mybatis.org/dtd/mybatis-3-mapper.dtd&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">mapper</span> <span class="attr">namespace</span>=<span class="string">&quot;ObjectMapper&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">insert</span> <span class="attr">id</span>=<span class="string">&quot;相应的Mapper方法名&quot;</span>&gt;</span></span><br><span class="line">        sql</span><br><span class="line">        // insert into student (name, address, email) values (#&#123;name&#125;, #&#123;address&#125;, #&#123;email&#125;)</span><br><span class="line">        占位符为#&#123;变量名，若传入对象，必须符合getter和setter规范，如以上中对应方法为：getName, getAddress, getEmail&#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">insert</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">&quot;相应的Mapper方法名&quot;</span> <span class="attr">resultType</span>=<span class="string">&quot;返回的类型，即反射对象&quot;</span>&gt;</span></span><br><span class="line">        sql</span><br><span class="line">    <span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">delete</span> <span class="attr">id</span>=<span class="string">&quot;相应的Mapper方法名&quot;</span>&gt;</span></span><br><span class="line">        sql</span><br><span class="line">    <span class="tag">&lt;/<span class="name">delete</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">update</span> <span class="attr">id</span>=<span class="string">&quot;相应的Mapper方法名&quot;</span>&gt;</span></span><br><span class="line">		sql</span><br><span class="line">    <span class="tag">&lt;/<span class="name">update</span>&gt;</span>	</span><br><span class="line"><span class="tag">&lt;/<span class="name">mapper</span>&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+
+<h3 id="ObjectMapper-java（interface接口）"><a href="#ObjectMapper-java（interface接口）" class="headerlink" title="ObjectMapper.java（interface接口）"></a>ObjectMapper.java（interface接口）</h3><p>通过调用此类进行操作</p>
+<div class="highlight-container" data-rel="Java"><figure class="iseeu highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">ObjectMapper</span> &#123;</span><br><span class="line">    返回类型 Mapper方法名(参数);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+]]></content>
+      <categories>
+        <category>Mybatis</category>
+      </categories>
+      <tags>
+        <tag>技术记录</tag>
+        <tag>Mybatis</tag>
+        <tag>Java</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>RecycleView使用指北</title>
+    <url>/2024/07/01/RecycleView%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8C%97/</url>
+    <content><![CDATA[<h2 id="设定-xml-布局"><a href="#设定-xml-布局" class="headerlink" title="设定 xml 布局"></a>设定 xml 布局</h2><p>首先在 .xml 文件中放置一个 RecyclerView</p>
+<div class="highlight-container" data-rel="Xml"><figure class="iseeu highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 🌰 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">androidx.recyclerview.widget.RecyclerView</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:id</span>=<span class="string">&quot;@+id/unpair_device_list&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:layout_width</span>=<span class="string">&quot;match_parent&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:layout_height</span>=<span class="string">&quot;wrap_content&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:scrollbars</span>=<span class="string">&quot;vertical&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">app:layout_constraintStart_toStartOf</span>=<span class="string">&quot;parent&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">app:layout_constraintTop_toTopOf</span>=<span class="string">&quot;parent&quot;</span> /&gt;</span></span><br></pre></td></tr></table></figure></div>
+
+<p>其次新建一个 .xml 文件用于对 RecyclerView 中每一条数据进行布局，姑且称为「子布局」</p>
+<div class="highlight-container" data-rel="Xml"><figure class="iseeu highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 🌰 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">LinearLayout</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:id</span>=<span class="string">&quot;@+id/unpair_linear&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_width</span>=<span class="string">&quot;match_parent&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_height</span>=<span class="string">&quot;wrap_content&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:orientation</span>=<span class="string">&quot;horizontal&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:background</span>=<span class="string">&quot;@drawable/recycler_touch_bg&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:minHeight</span>=<span class="string">&quot;28dp&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_marginTop</span>=<span class="string">&quot;8dp&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">app:layout_constraintTop_toTopOf</span>=<span class="string">&quot;parent&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">TextView</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:id</span>=<span class="string">&quot;@+id/unpair_device_name&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:layout_width</span>=<span class="string">&quot;wrap_content&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:layout_height</span>=<span class="string">&quot;wrap_content&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:width</span>=<span class="string">&quot;200dp&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:singleLine</span>=<span class="string">&quot;false&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:text</span>=<span class="string">&quot;name&quot;</span> /&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">Space</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:layout_width</span>=<span class="string">&quot;wrap_content&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:layout_height</span>=<span class="string">&quot;wrap_content&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:layout_weight</span>=<span class="string">&quot;0.5&quot;</span> /&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">TextView</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:id</span>=<span class="string">&quot;@+id/unpair_device_status&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:layout_width</span>=<span class="string">&quot;wrap_content&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:layout_height</span>=<span class="string">&quot;wrap_content&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:width</span>=<span class="string">&quot;84dp&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:gravity</span>=<span class="string">&quot;end&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:text</span>=<span class="string">&quot;status&quot;</span> /&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">ImageButton</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:id</span>=<span class="string">&quot;@+id/device_detail&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:layout_width</span>=<span class="string">&quot;32dp&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:layout_height</span>=<span class="string">&quot;32dp&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:layout_marginEnd</span>=<span class="string">&quot;4dp&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:layout_marginStart</span>=<span class="string">&quot;4dp&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:background</span>=<span class="string">&quot;@android:color/transparent&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:contentDescription</span>=<span class="string">&quot;@string/device_detail_ico&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">android:scaleType</span>=<span class="string">&quot;fitCenter&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">app:layout_constraintBottom_toBottomOf</span>=<span class="string">&quot;parent&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">app:layout_constraintEnd_toEndOf</span>=<span class="string">&quot;parent&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">app:layout_constraintTop_toTopOf</span>=<span class="string">&quot;parent&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">app:srcCompat</span>=<span class="string">&quot;@drawable/back_ico&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">LinearLayout</span>&gt;</span></span><br></pre></td></tr></table></figure></div>
+
+<h2 id="构建-RecyclerViewAdapter"><a href="#构建-RecyclerViewAdapter" class="headerlink" title="构建 RecyclerViewAdapter"></a>构建 RecyclerViewAdapter</h2><p>接着新建一个 RecyclerViewAdapter.kt(这里以 kotlin 为例)</p>
+<div class="highlight-container" data-rel="Kotlin"><figure class="iseeu highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 类一般包含上下文，继承RecyclerView.Adapter，类型为自身的ViewHolder(稍后创建)</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">UnpairRecyclerViewAdapter</span>(<span class="keyword">private</span> <span class="keyword">val</span> context: Activity) :RecyclerView.Adapter&lt;UnpairRecyclerViewAdapter.ViewHolder&gt;() &#123;</span><br><span class="line">    <span class="comment">// 创建一个数据集，用于存储数据</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">var</span> devices: List&lt;BluetoothDevice&gt; = listOf()</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 创建一个内部类，包含子布局的 view</span></span><br><span class="line">    <span class="keyword">class</span> <span class="title class_">ViewHolder</span>(itemView: View) : RecyclerView.ViewHolder(itemView) &#123;</span><br><span class="line">        <span class="keyword">val</span> unpairDeviceName: TextView = itemView.findViewById(R.id.unpair_device_name)</span><br><span class="line">        <span class="keyword">val</span> unpairDeviceStatus: TextView = itemView.findViewById(R.id.unpair_device_status)</span><br><span class="line">	&#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 重写获取创建 ViewHolder 方法，用于获取子布局(这里获取的是.xml文件，这才能让上面的内部类访问其中的 view)</span></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onCreateViewHolder</span><span class="params">(parent: <span class="type">ViewGroup</span>, viewType: <span class="type">Int</span>)</span></span>: ViewHolder &#123;</span><br><span class="line">        <span class="keyword">val</span> view =</span><br><span class="line">            LayoutInflater.from(parent.context).inflate(R.layout.unpair_list_item, parent, <span class="literal">false</span>)</span><br><span class="line">        <span class="keyword">return</span> ViewHolder(view)</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 用于将数据绑定到 view 中</span></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onBindViewHolder</span><span class="params">(holder: <span class="type">ViewHolder</span>, position: <span class="type">Int</span>)</span></span> &#123;</span><br><span class="line">        <span class="keyword">val</span> device = devices[position]</span><br><span class="line">        <span class="keyword">if</span> (!Utils.checkPermission(context, BLUETOOTH_CONNECT)) &#123;</span><br><span class="line">            Utils.requestPermission(context, BLUETOOTH_CONNECT)</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line">        &#125;</span><br><span class="line">        holder.unpairDeviceName.text = device.name ?: <span class="string">&quot;Unknown&quot;</span></span><br><span class="line">        holder.unpairDeviceStatus.text = <span class="string">&quot;未配对&quot;</span></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 用于获取数据的个数</span></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">getItemCount</span><span class="params">()</span></span>: <span class="built_in">Int</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> devices.size</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 这里是自行创建的方法，用于更新数据集并提醒 RecycleView 的更新</span></span><br><span class="line">    <span class="meta">@SuppressLint(<span class="string">&quot;NotifyDataSetChanged&quot;</span>)</span></span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">setUnpairList</span><span class="params">(deviceList: <span class="type">List</span>&lt;<span class="type">BluetoothDevice</span>&gt;)</span></span> &#123;</span><br><span class="line">        devices = deviceList</span><br><span class="line">        </span><br><span class="line">        context.runOnUiThread &#123;<span class="comment">// 防止在非UI线程中被调用抛出错误</span></span><br><span class="line">            Handler(Looper.getMainLooper()).post &#123;<span class="comment">// 将提醒数据更新的行为放在主线程，防止与UI绘制打架抛出错误</span></span><br><span class="line">                notifyDataSetChanged()</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+
+
+
+<h2 id="在-Activity-中实例化"><a href="#在-Activity-中实例化" class="headerlink" title="在 Activity 中实例化"></a>在 Activity 中实例化</h2><p>接下来需要在目标 activity 中加载RecycleView的适配器和更新数据</p>
+<div class="highlight-container" data-rel="Kotlin"><figure class="iseeu highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 获取目标 RecyclerView，</span></span><br><span class="line"><span class="keyword">val</span> pairDevicesList: RecyclerView = view.findViewById(R.id.pair_device_list)</span><br><span class="line"><span class="comment">// 实例化适配器</span></span><br><span class="line"><span class="keyword">val</span> pairAdapter = PairRecyclerViewAdapter(requireActivity(), <span class="keyword">this</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 为 RecyclerView 设置适配器</span></span><br><span class="line">pairDevicesList.adapter = pairAdapter</span><br><span class="line"><span class="comment">// 为 RecyclerView 设置布局管理器(经常忘记导致老是不出数据)</span></span><br><span class="line">pairDevicesList.layoutManager = LinearLayoutManager(requireActivity())</span><br><span class="line"></span><br><span class="line"><span class="comment">// 接下来就可以更新数据了</span></span><br><span class="line">pairAdapter.setUnpairList(<span class="comment">/* 传入的数据 */</span>)</span><br></pre></td></tr></table></figure></div>
+
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+      <tags>
+        <tag>踩坑记录</tag>
+        <tag>Android</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>YOLOV8环境配置速通</title>
+    <url>/2024/03/26/YOLOV8%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE%E9%80%9F%E9%80%9A/</url>
+    <content><![CDATA[<h2 id="前置安装软件"><a href="#前置安装软件" class="headerlink" title="前置安装软件"></a>前置安装软件</h2><ul>
+<li>python8+</li>
+<li>Anaconda（mini版也可以）（记得加入环境变量）</li>
+</ul>
+<h2 id="创建想虚拟环境"><a href="#创建想虚拟环境" class="headerlink" title="创建想虚拟环境"></a>创建想虚拟环境</h2><p><em>前置条件</em> anaconda 环境良好</p>
+<p>win + s，或在快捷方式里找到 Anaconda Prompt (Anaconda)</p>
+<p>创建一个名为 yolov8(自行取名) 的环境</p>
+<div class="highlight-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">conda create -n yolov8 python=3.8</span><br></pre></td></tr></table></figure></div>
+
+<p>查看环境列表</p>
+<div class="highlight-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">conda env list</span><br></pre></td></tr></table></figure></div>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://img2.imgtp.com/2024/03/26/ymGTCGNy.png"
+                      alt="{01}"
+                ></p>
+<p>切换到新创建的环境</p>
+<div class="highlight-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">activate yolov8</span><br></pre></td></tr></table></figure></div>
+
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://img2.imgtp.com/2024/03/26/EjaXlD9R.png"
+                      alt="{02}"
+                ></p>
+<h2 id="安装cuda-cudnn-使用N卡下"><a href="#安装cuda-cudnn-使用N卡下" class="headerlink" title="安装cuda + cudnn(使用N卡下)"></a>安装cuda + cudnn(使用N卡下)</h2><p>更换清华镜像源(如需要)</p>
+<div class="highlight-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">conda config --add channels http://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/win-64</span><br><span class="line">conda config --add channels http://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/win-64</span><br><span class="line">conda config --set show_channel_urls yes</span><br></pre></td></tr></table></figure></div>
+
+<p>查看 cuda 的支持版本</p>
+<div class="highlight-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">nvidia-smi</span><br></pre></td></tr></table></figure></div>
+
+<p>进入 <a class="link"   href="https://developer.nvidia.com/cuda-toolkit" >CUDA Toolkit - Free Tools and Training | NVIDIA Developer <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a> 安装相应版本的cuda工具</p>
+<p>进入 <a class="link"   href="https://developer.nvidia.com/cudnn" >CUDA Deep Neural Network (cuDNN) | NVIDIA Developer <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a> 安装相应 cuda 的 cudann</p>
+<h2 id="安装-pytorch"><a href="#安装-pytorch" class="headerlink" title="安装 pytorch"></a>安装 pytorch</h2><p><a class="link"   href="https://pytorch.org/get-started/locally/" >Start Locally | PyTorch <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<p>根据你的环境安装</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://img2.imgtp.com/2024/03/26/uCfPovPu.png"
+                      alt="{03}"
+                ></p>
+<p>使用conda的包，选好版本后复制进 yolov8 环境下的命令窗口运行</p>
+<h2 id="安装ultralytics"><a href="#安装ultralytics" class="headerlink" title="安装ultralytics"></a>安装ultralytics</h2><ol>
+<li>使用CLI</li>
+</ol>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">pip install ultralytics</span><br></pre></td></tr></table></figure></div>
+
+<ol start="2">
+<li>直接 clone 源码解压</li>
+</ol>
+<p>进入源码目录，输入</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">pip install -e</span><br></pre></td></tr></table></figure></div>
+
+<p>安装</p>
+<h2 id="下载训练模型"><a href="#下载训练模型" class="headerlink" title="下载训练模型"></a>下载训练模型</h2><p><a class="link"   href="https://github.com/ultralytics/assets/releases" >Releases · ultralytics&#x2F;assets (github.com) <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a></p>
+<p>选择合适的训练模型下载</p>
+<h2 id="标记图片"><a href="#标记图片" class="headerlink" title="标记图片"></a>标记图片</h2><h3 id="安装-labelimg"><a href="#安装-labelimg" class="headerlink" title="安装 labelimg"></a>安装 labelimg</h3><p><strong>pip 安装</strong></p>
+<p>依次执行</p>
+<div class="highlight-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">pip install PyQt5</span><br><span class="line">pip install pyqt5-tools</span><br><span class="line">pip install lxml</span><br><span class="line">pip install labelimg</span><br></pre></td></tr></table></figure></div>
+
+<p><strong>conda 安装</strong></p>
+<p>conda 会自动安装相关的依赖包</p>
+<div class="highlight-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">conda install labelimg</span><br></pre></td></tr></table></figure></div>
+
+<h2 id="使用-labelimg-对图片标注"><a href="#使用-labelimg-对图片标注" class="headerlink" title="使用 labelimg 对图片标注"></a>使用 labelimg 对图片标注</h2><ul>
+<li>在 yolov8 环境下执行命令行</li>
+</ul>
+<div class="highlight-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">labelimg</span><br></pre></td></tr></table></figure></div>
+
+<ul>
+<li>建议勾选自动保存</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://img2.imgtp.com/2024/03/26/JEB7UF8D.png"
+                      alt="{04}"
+                ></p>
+<ul>
+<li>点击标记格式更改为 YOLO，从上至下分别是：打开单个图片，打开一个文件夹，更改保存文件夹，下一张图片，上一张图片，确认图片，保存</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://img2.imgtp.com/2024/03/26/eQIujVNx.png"
+                      alt="{05}"
+                ></p>
+<ul>
+<li>导入图片后，右键选择 Create Rectbox 或 “W” 快捷键进入标记模式，框选主体，在弹出的框中输入主题的名字，例如下图输入 panda，点击回车或 OK 后完成这一主体的标记。</li>
+<li>单个图片可以标记多个主体，完成标记后如果选择自动保存可以直接进入下一张继续标记，否则记得点击保存~</li>
+</ul>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://img2.imgtp.com/2024/03/26/8LLMMukp.png"
+                      alt="{06}"
+                ></p>
+<ul>
+<li>完成标记后得到一批 图片名.txt 的文件以及 class.txt 文件，训练主要需要 图片名.txt 文件，class.txt 记录有多少的分类以及分类名</li>
+</ul>
+<h2 id="训练"><a href="#训练" class="headerlink" title="训练"></a>训练</h2><h3 id="数据集文件树"><a href="#数据集文件树" class="headerlink" title="数据集文件树"></a>数据集文件树</h3><p>构建以下结构的文件夹目录，用于存放数据</p>
+<p>将被标记的图片放在 dataset&#x2F;images&#x2F;train 中，与被标记具有相同主体的未标记图片放在 dataset&#x2F;images&#x2F;val 中用于验证</p>
+<p>将标记生成的 图片名.txt 放入 dataset&#x2F;labels&#x2F;train 中，务必和标记的图片一一对应</p>
+<div class="highlight-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line">dataset</span><br><span class="line">  --images</span><br><span class="line">    --train(存放训练的图片)</span><br><span class="line">    --val(用于验证的图片)</span><br><span class="line">    --test(optional)</span><br><span class="line">  --labels</span><br><span class="line">    --train(与训练图片相对应得标签文件)</span><br><span class="line">    --val</span><br><span class="line">    --test(optional)</span><br></pre></td></tr></table></figure></div>
+
+
+
+<h3 id="model中-pt-和-yaml-的区别"><a href="#model中-pt-和-yaml-的区别" class="headerlink" title="model中 .pt 和 .yaml 的区别"></a>model中 .pt 和 .yaml 的区别</h3><ul>
+<li>.pt 是指从预训练模型的基础上进行训练。若我们选择 yolov8n.pt这种.pt类型的文件，其实里面是包含了模型的结构和训练好的参数的，也就是说拿来就可以用，就已经具备了检测目标的能力了，yolov8n.pt能检测coco中的80个类别。假设你要检测不同种类的狗，那么yolov8n.pt原本可以检测狗的能力对你训练应该是有帮助的，你只需要在此基础上提升其对不同狗的鉴别能力即可。但如果你需要检测的类别不在其中，例如口罩检测，那么就帮助不大。</li>
+<li>.yaml是从零开始训练</li>
+</ul>
+<h3 id="data"><a href="#data" class="headerlink" title="data"></a>data</h3><p>指定数据集文件的位置，数据集包含训练和验证的图像、标签</p>
+<p>.yaml的配置样例如下</p>
+<div class="highlight-container" data-rel="Yaml"><figure class="iseeu highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">path:</span> <span class="string">../datasets/coco128</span>  <span class="comment"># dataset root dir 数据集得根目录</span></span><br><span class="line"><span class="attr">train:</span> <span class="string">images/train2017</span>  <span class="comment"># train images (relative to &#x27;path&#x27;) 128 images 训练图片的文件夹</span></span><br><span class="line"><span class="attr">val:</span> <span class="string">images/train2017</span>  <span class="comment"># val images (relative to &#x27;path&#x27;) 128 images 训练图标的标签的文件夹</span></span><br><span class="line"><span class="attr">test:</span>  <span class="comment"># test images (optional)</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Classes</span></span><br><span class="line"><span class="attr">nc:</span> <span class="number">2</span>  <span class="comment"># number of classes</span></span><br><span class="line"><span class="attr">names:</span> </span><br><span class="line">	<span class="attr">0:</span> <span class="string">class1</span></span><br><span class="line">	<span class="attr">1:</span> <span class="string">class2</span></span><br><span class="line"><span class="comment"># class names</span></span><br><span class="line"></span><br></pre></td></tr></table></figure></div>
+
+<h3 id="脚本"><a href="#脚本" class="headerlink" title="脚本"></a>脚本</h3><p>编写一个 .py 文件用于训练</p>
+<div class="highlight-container" data-rel="Python"><figure class="iseeu highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> ultralytics <span class="keyword">import</span> YOLO</span><br><span class="line"></span><br><span class="line"><span class="comment"># 加载模型</span></span><br><span class="line">model = YOLO(<span class="string">&#x27;yolov8n.yaml&#x27;</span>)  <span class="comment"># 从yaml文件加载</span></span><br><span class="line">model = YOLO(<span class="string">&#x27;yolov8n.pt&#x27;</span>)  <span class="comment"># 加载预训练模型</span></span><br><span class="line">model = YOLO(<span class="string">&#x27;yolov8n.yaml&#x27;</span>).load(<span class="string">&#x27;yolov8n.pt&#x27;</span>)  <span class="comment"># 从 YAML加载 然后再加载权重</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 指定训练参数开始训练</span></span><br><span class="line">model.train(data=<span class="string">&#x27;coco128.yaml&#x27;</span>, epochs=<span class="number">100</span>, imgsz=<span class="number">640</span>)</span><br></pre></td></tr></table></figure></div>
+
+<h3 id="命令行"><a href="#命令行" class="headerlink" title="命令行"></a>命令行</h3><p>直接在 yolov8 环境下的命令行执行</p>
+<div class="highlight-container" data-rel="Shell"><figure class="iseeu highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">从YAML构建新模型，从头开始训练</span></span><br><span class="line">yolo detect train data=coco128.yaml model=yolov8n.yaml epochs=100 imgsz=640</span><br><span class="line"><span class="meta prompt_"> </span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">从预训练*.pt模型开始训练</span></span><br><span class="line">yolo detect train data=coco128.yaml model=yolov8n.pt epochs=100 imgsz=640</span><br><span class="line"><span class="meta prompt_"> </span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">从YAML构建一个新模型，转移预训练权重，然后开始训练</span></span><br><span class="line">yolo detect train data=coco128.yaml model=yolov8n.yaml pretrained=yolov8n.pt epochs=100 imgsz=640</span><br></pre></td></tr></table></figure></div>
+
+<h2 id="结果"><a href="#结果" class="headerlink" title="结果"></a>结果</h2><p>(忽略我拿 CPU 跑的1个半小时)</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="https://img2.imgtp.com/2024/03/26/zleyyLZH.png"
+                      alt="07"
+                ></p>
+<p>结果的模型保存在 runs&#x2F;detect 内，包含最后一次的模型和效果最好的模型，至此训练完成</p>
+<h3 id="参数说明"><a href="#参数说明" class="headerlink" title="参数说明"></a>参数说明</h3><p>训练命令的参数如下所示，可根据自身需求更改</p>
+<table>
+<thead>
+<tr>
+<th>参数名</th>
+<th>默认值&#x2F;设置</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>model</td>
+<td>None</td>
+<td>模型文件路径，例如 yolov8n.pt, yolov8n.yaml</td>
+</tr>
+<tr>
+<td>data</td>
+<td>None</td>
+<td>数据文件路径，例如 coco128.yaml</td>
+</tr>
+<tr>
+<td>epochs</td>
+<td>100</td>
+<td>训练的轮次数量</td>
+</tr>
+<tr>
+<td>patience</td>
+<td>50</td>
+<td>早停训练的等待轮次</td>
+</tr>
+<tr>
+<td>batch</td>
+<td>16</td>
+<td>每批图像数量</td>
+</tr>
+<tr>
+<td>imgsz</td>
+<td>640</td>
+<td>输入图像的大小，以整数表示</td>
+</tr>
+<tr>
+<td>save</td>
+<td>True</td>
+<td>保存训练检查点和预测结果</td>
+</tr>
+<tr>
+<td>save_period</td>
+<td>-1</td>
+<td>每x轮次保存检查点</td>
+</tr>
+<tr>
+<td>cache</td>
+<td>False</td>
+<td>使用缓存加载数据</td>
+</tr>
+<tr>
+<td>device</td>
+<td>None</td>
+<td>运行设备，例如 cuda device&#x3D;0 或 device&#x3D;0,1,2,3 或 device&#x3D;cpu</td>
+</tr>
+<tr>
+<td>workers</td>
+<td>8</td>
+<td>数据加载的工作线程数</td>
+</tr>
+<tr>
+<td>pretrained</td>
+<td>True</td>
+<td>（bool 或 str）是否使用预训练模型（bool）或从中加载权重的模型（str）</td>
+</tr>
+<tr>
+<td>optimizer</td>
+<td>‘auto’</td>
+<td>使用的优化器，选择范围&#x3D;[SGD, Adam, Adamax, AdamW, NAdam, RAdam, RMSProp, auto]</td>
+</tr>
+<tr>
+<td>verbose</td>
+<td>False</td>
+<td>是否打印详细输出</td>
+</tr>
+<tr>
+<td>seed</td>
+<td>0</td>
+<td>随机种子，用于可重复性</td>
+</tr>
+<tr>
+<td>deterministic</td>
+<td>True</td>
+<td>是否启用确定性模式</td>
+</tr>
+<tr>
+<td>single_cls</td>
+<td>False</td>
+<td>将多类数据作为单类训练</td>
+</tr>
+<tr>
+<td>rect</td>
+<td>False</td>
+<td>矩形训练，每批为最小填充整合</td>
+</tr>
+<tr>
+<td>cos_lr</td>
+<td>False</td>
+<td>使用余弦学习率调度器</td>
+</tr>
+<tr>
+<td>close_mosaic</td>
+<td>10</td>
+<td>(int) 最后轮次禁用马赛克增强（0为禁用）</td>
+</tr>
+<tr>
+<td>resume</td>
+<td>False</td>
+<td>从最后检查点恢复训练</td>
+</tr>
+<tr>
+<td>amp</td>
+<td>True</td>
+<td>自动混合精度（AMP）训练，选择范围&#x3D;[True, False]</td>
+</tr>
+<tr>
+<td>fraction</td>
+<td>1.0</td>
+<td>训练的数据集比例（默认为1.0，即训练集中的所有图像）</td>
+</tr>
+<tr>
+<td>profile</td>
+<td>False</td>
+<td>在训练期间为记录器分析ONNX和TensorRT速度</td>
+</tr>
+<tr>
+<td>freeze</td>
+<td>None</td>
+<td>(int 或 list, 可选) 在训练期间冻结前n层，或冻结层索引列表</td>
+</tr>
+<tr>
+<td>lr0</td>
+<td>0.01</td>
+<td>初始学习率（例如 SGD&#x3D;1E-2, Adam&#x3D;1E-3）</td>
+</tr>
+<tr>
+<td>lrf</td>
+<td>0.01</td>
+<td>最终学习率 (lr0 * lrf)</td>
+</tr>
+<tr>
+<td>momentum</td>
+<td>0.937</td>
+<td>SGD动量&#x2F;Adam beta1</td>
+</tr>
+<tr>
+<td>weight_decay</td>
+<td>0.0005</td>
+<td>优化器权重衰减5e-4</td>
+</tr>
+<tr>
+<td>warmup_epochs</td>
+<td>3.0</td>
+<td>热身轮次（小数ok）</td>
+</tr>
+<tr>
+<td>warmup_momentum</td>
+<td>0.8</td>
+<td>热身初始动量</td>
+</tr>
+<tr>
+<td>warmup_bias_lr</td>
+<td>0.1</td>
+<td>热身初始偏差lr</td>
+</tr>
+<tr>
+<td>box</td>
+<td>7.5</td>
+<td>框损失增益</td>
+</tr>
+<tr>
+<td>cls</td>
+<td>0.5</td>
+<td>cls损失增益（根据像素缩放）</td>
+</tr>
+<tr>
+<td>dfl</td>
+<td>1.5</td>
+<td>dfl损失增益</td>
+</tr>
+<tr>
+<td>pose</td>
+<td>12.0</td>
+<td>姿态损失增益（仅限姿态）</td>
+</tr>
+<tr>
+<td>kobj</td>
+<td>2.0</td>
+<td>关键点obj损失增益（仅限姿态）</td>
+</tr>
+<tr>
+<td>label_smoothing</td>
+<td>0.0</td>
+<td>标签平滑（小数）</td>
+</tr>
+<tr>
+<td>nbs</td>
+<td>64</td>
+<td>标称批大小</td>
+</tr>
+<tr>
+<td>overlap_mask</td>
+<td>True</td>
+<td>训练期间掩码应重叠（仅限分割训练）</td>
+</tr>
+<tr>
+<td>mask_ratio</td>
+<td>4</td>
+<td>掩码降采样比率（仅限分割训练）</td>
+</tr>
+<tr>
+<td>dropout</td>
+<td>0.0</td>
+<td>使用dropout正则化（仅限分类训练）</td>
+</tr>
+<tr>
+<td>val</td>
+<td>True</td>
+<td>训练期间验证&#x2F;测试</td>
+</tr>
+</tbody></table>
+]]></content>
+      <categories>
+        <category>YOLO</category>
+      </categories>
+      <tags>
+        <tag>踩坑记录</tag>
+        <tag>技术记录</tag>
+        <tag>YOLO</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>关于CSS中scroll--snap未生效</title>
+    <url>/2024/05/19/%E5%85%B3%E4%BA%8E%20CSS%20%E4%B8%AD%20scroll-snap%20%E6%9C%AA%E7%94%9F%E6%95%88/</url>
+    <content><![CDATA[<h2 id="CSS中scroll–snap未生效"><a href="#CSS中scroll–snap未生效" class="headerlink" title="CSS中scroll–snap未生效"></a>CSS中scroll–snap未生效</h2><div class="highlight-container" data-rel="Html"><figure class="iseeu highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;header&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;container&quot;</span> <span class="attr">class</span>=<span class="string">&quot;container&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;page1&quot;</span> <span class="attr">class</span>=<span class="string">&quot;pages&quot;</span> <span class="attr">style</span>=<span class="string">&quot;background-color: aqua&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;page2&quot;</span> <span class="attr">class</span>=<span class="string">&quot;pages&quot;</span> <span class="attr">style</span>=<span class="string">&quot;background-color: #3c71b5&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;page3&quot;</span> <span class="attr">class</span>=<span class="string">&quot;pages&quot;</span> <span class="attr">style</span>=<span class="string">&quot;background-color: #2422bf&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure></div>
+
+<div class="highlight-container" data-rel="Css"><figure class="iseeu highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.pages</span> &#123;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">100vh</span>;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">    <span class="attribute">scroll-snap-align</span>: start;</span><br><span class="line">    <span class="attribute">scroll-snap-stop</span>: always;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.container</span> &#123;</span><br><span class="line">    <span class="attribute">scroll-snap-type</span>: y mandatory;</span><br><span class="line">    <span class="attribute">overflow-y</span>: auto;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p>此时F12发现有吸附点，但并没有吸附，原因是直接父容器没有给予高度</p>
+<h2 id="实现！！"><a href="#实现！！" class="headerlink" title="实现！！"></a>实现！！</h2><div class="highlight-container" data-rel="Css"><figure class="iseeu highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.pages</span> &#123;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">100vh</span>;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">    <span class="attribute">scroll-snap-align</span>: start;</span><br><span class="line">    <span class="attribute">scroll-snap-stop</span>: always;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.container</span> &#123;</span><br><span class="line">    <span class="attribute">scroll-snap-type</span>: y mandatory;</span><br><span class="line">    <span class="attribute">overflow-y</span>: auto;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">100vh</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+]]></content>
+      <categories>
+        <category>Web</category>
+      </categories>
+      <tags>
+        <tag>踩坑记录</tag>
+        <tag>Web</tag>
+        <tag>CSS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>使用 clip-path 实现 Web 滑动条</title>
+    <url>/2023/12/30/clip-path%E7%9A%84%E4%BD%BF%E7%94%A8/</url>
+    <content><![CDATA[<p><code>clip-path</code>属性可以创建一个只有部分可见的元素</p>
+<div class="highlight-container" data-rel="Css"><figure class="iseeu highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.white-text</span> &#123;</span><br><span class="line">    <span class="attribute">position</span>: absolute;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">    <span class="attribute">text-align</span>: center;</span><br><span class="line">    <span class="attribute">line-height</span>: <span class="number">30px</span>;</span><br><span class="line">    <span class="attribute">pointer-events</span>: none;</span><br><span class="line">    <span class="attribute">color</span>: white;</span><br><span class="line">    <span class="attribute">z-index</span>: <span class="number">3</span>;</span><br><span class="line">    <span class="attribute">clip-path</span>: <span class="built_in">inset</span>(<span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+<p>在这个例子中，<strong>white-text</strong>样式添加了一个属性：clip-path，inset(0, 0, 0, 0)参数定义了一个剪切区域，上、右、下、左四个边的剪切距离</p>
+<div class="highlight-container" data-rel="Html"><figure class="iseeu highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;white-text&quot;</span> <span class="attr">id</span>=<span class="string">&quot;progressText1&quot;</span>&gt;</span>0%<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure></div>
+
+<div class="highlight-container" data-rel="Js"><figure class="iseeu highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">updateProgressBar</span>(<span class="params">e</span>) &#123;</span><br><span class="line">        <span class="keyword">let</span> bounds = progressContainer.<span class="title function_">getBoundingClientRect</span>();</span><br><span class="line">        <span class="keyword">let</span> x = e.<span class="property">pageX</span> - bounds.<span class="property">left</span>;</span><br><span class="line">        <span class="keyword">let</span> percentage = <span class="title class_">Math</span>.<span class="title function_">max</span>(<span class="number">0</span>, <span class="title class_">Math</span>.<span class="title function_">min</span>(<span class="number">100</span>, (x / bounds.<span class="property">width</span>) * <span class="number">100</span>));</span><br><span class="line">        <span class="keyword">let</span> text = <span class="title class_">Math</span>.<span class="title function_">round</span>(percentage) + <span class="string">&#x27;%&#x27;</span>;</span><br><span class="line">        progressBar.<span class="property">style</span>.<span class="property">width</span> = percentage + <span class="string">&#x27;%&#x27;</span>;</span><br><span class="line">        progressMask.<span class="property">style</span>.<span class="property">width</span> = <span class="number">100</span> - percentage + <span class="string">&#x27;%&#x27;</span>;</span><br><span class="line">        progressText1.<span class="property">textContent</span> = text;</span><br><span class="line">        progressText1.<span class="property">style</span>.<span class="property">clipPath</span> = <span class="string">`inset(0 <span class="subst">$&#123;<span class="number">100</span> - percentage&#125;</span>% 0 0)`</span>;</span><br><span class="line">        progressText2.<span class="property">textContent</span> = text;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></div>
+
+<p>右边的剪切距离为<code>100 - percentage</code>%，表示其显示区域与进度条一致，当进度条覆盖黑色文本时白色文本相应的显示出来，实现了变色的效果</p>
+]]></content>
+      <categories>
+        <category>Web</category>
+      </categories>
+      <tags>
+        <tag>技术记录</tag>
+        <tag>Web</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>nginx 禁止 ip 直接访问，放行域名请求</title>
+    <url>/2024/03/21/%E5%85%B3%E4%BA%8E%20nginx%20%E7%A6%81%E6%AD%A2%20ip%20%E7%9B%B4%E6%8E%A5%E8%AE%BF%E9%97%AE/</url>
+    <content><![CDATA[<p>首先，进入 nginx 的配置文件</p>
+<p>获取配置文件地址</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">nginx -t</span><br><span class="line"></span><br><span class="line">vi &lt;你的路径/nginx.conf&gt;</span><br></pre></td></tr></table></figure></div>
+
+<p>在 http 作用域内添加</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">	listen 80 default;// 监听80端口(http)的默认地址，也就是你的ip</span><br><span class="line">	<span class="built_in">return</span> 403;// 返回403</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<h3 id="放行来自你的域名的请求"><a href="#放行来自你的域名的请求" class="headerlink" title="放行来自你的域名的请求"></a>放行来自你的域名的请求</h3><p>同样在 nginx.conf 的 http 作用域内</p>
+<div class="highlight-container" data-rel="Bash"><figure class="iseeu highlight bash"><table><tr><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">	listen 80;</span><br><span class="line">	server_name ishmp.cn *.ishmp.cn;// 例如我的域名解析允许域名直接访问和泛解析，这里放行这两种形式域名请求</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p>重启 nginx，你就会发现ip直接访问会得到403错误码，放行的域名可正常访问</p>
+]]></content>
+      <categories>
+        <category>nginx</category>
+      </categories>
+      <tags>
+        <tag>技术记录</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>MainActivity 简单编写</title>
+    <url>/2024/05/31/%E5%9F%BA%E4%BA%8E%20viewpager2%20%E5%AE%9E%E7%8E%B0%E5%B7%A6%E5%8F%B3%E7%BF%BB%E9%A1%B5/</url>
+    <content><![CDATA[<h2 id="文件结构"><a href="#文件结构" class="headerlink" title="文件结构"></a>文件结构</h2><ol>
+<li>在 activity_main.xml 中放置一个 viewpaper2 布局，并在同级 layout 文件夹中放置多个 tap.xml，表示子页面</li>
+<li>在 java 包中对每个页面建立一个类，，名为 fragment，用于显示子页面，关联相应的 tab.xml 文件</li>
+<li>建立一个文件，作为适配器(Adapter)，处理 viewpaper 的多个页面。创建每个子页面的实例</li>
+<li>最后在 MainActivity 创建适配器实例，显示多个子页面</li>
+</ol>
+<h3 id="栗子"><a href="#栗子" class="headerlink" title="栗子"></a>栗子</h3><div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">aifragment.xml----AiFragment.kt----|</span><br><span class="line">								|-ViewPagerAdapter.kt--|</span><br><span class="line">homefragment.xml--HomeFragment.kt--|                      |--MainActivity.kt</span><br><span class="line">                       viewpager2--activity_main.xml------|</span><br></pre></td></tr></table></figure></div>
+<p>AiFragment.kt</p>
+<div class="highlight-container" data-rel="Kotlin"><figure class="iseeu highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 继承 Fragment()</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">AiFragment</span> : <span class="type">Fragment</span>() &#123;</span><br><span class="line">    <span class="comment">// 重写方法，用于创建该 Fragment 视图</span></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onCreateView</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">        inflater: <span class="type">LayoutInflater</span>,<span class="comment">// 将布局文件转换为视图对象</span></span></span></span><br><span class="line"><span class="params"><span class="function">        container: <span class="type">ViewGroup</span>?,<span class="comment">// 将 Fragment 视图添加到父视图中</span></span></span></span><br><span class="line"><span class="params"><span class="function">        savedInstanceState: <span class="type">Bundle</span>?<span class="comment">// 如果 Fragment 从之前保存的状态中重新创建，这个 Bundle 将包含它的数据。否则，它将是 null</span></span></span></span><br><span class="line"><span class="params"><span class="function">    )</span></span>: View? &#123;<span class="comment">// 将该布局转换为 View 对象并返回</span></span><br><span class="line">        <span class="keyword">return</span> inflater.inflate(R.layout.aifragment, container, <span class="literal">false</span>)<span class="comment">// false 表示告诉系统不要将生成的视图附加到 container。这是因为系统将在你返回视图后自动执行此操作。</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p>MainActivity.kt</p>
+<div class="highlight-container" data-rel="Kotlin"><figure class="iseeu highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">MainActivity</span> : <span class="type">AppCompatActivity</span>() &#123;</span><br><span class="line">    <span class="comment">// 重写 onCreate 方法，该方法是Activity 生命周期中的第一个方法，当 Activity 被创建时，它会被调用</span></span><br><span class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">fun</span> <span class="title">onCreate</span><span class="params">(savedInstanceState: <span class="type">Bundle</span>?)</span></span> &#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState)<span class="comment">// 对父类方法的调用</span></span><br><span class="line">        enableEdgeToEdge()<span class="comment">// 使应用覆盖到状态栏等区域，更加沉浸</span></span><br><span class="line">        setContentView(R.layout.activity_main)<span class="comment">// 设置 Activity 布局，传入布局的 id</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">val</span> viewPage: ViewPager2 = findViewById(R.id.view_page)<span class="comment">// 创建一个变量，获取某个 ViewPager2 的组件 id</span></span><br><span class="line">        viewPage.adapter = ViewPagerAdapter(<span class="keyword">this</span>)<span class="comment">// 将 viewPage 的适配器指向我们自己创建的适配器，传入参数 this 指向当前 MainActivity 实例</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+      <tags>
+        <tag>Android</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>MVC 和 MVP 的区别</title>
+    <url>/2024/05/30/%E5%BC%80%E5%8F%91%E7%BB%93%E6%9E%84/</url>
+    <content><![CDATA[<h3 id="MVC-指-model-view-control"><a href="#MVC-指-model-view-control" class="headerlink" title="MVC 指 model, view, control"></a>MVC 指 model, view, control</h3><p>当用户触发事件的时候，view层会发送指令到controller层，接着controller去通知model层更新数据，model层更新完数据以后直接显示在view层上</p>
+<p><strong>缺点</strong>：View与Model之间还存在依赖关系，Controller很重很复杂</p>
+<h3 id="MVP-指-model-view-presenter-主持人"><a href="#MVP-指-model-view-presenter-主持人" class="headerlink" title="MVP 指 model, view, presenter(主持人)"></a>MVP 指 model, view, presenter(主持人)</h3><p><strong>Model</strong>：代表我们的数据模型，管理数据状态。<br><strong>View</strong>：视图，即呈现给用户的UI，并且负责与客户进行交互。比如我们的XML&#x2F;Activity&#x2F;Fragment。<br><strong>Presenter</strong>：主持者，Presenter通过View接收用户的输入，然后在Model的帮助下处理用户的数据并将结果传递回View。Presenter通过接口与View进行通信。接口在presenter类中定义，它传递所需的数据。Activity&#x2F;Fragment 及其他View视图组件实现此接口获得他们想要的数据并呈现数据。</p>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+      <tags>
+        <tag>踩坑记录</tag>
+        <tag>Android</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>web 实现滑动阻尼</title>
+    <url>/2024/05/20/%E6%BB%91%E5%8A%A8%E9%98%BB%E5%B0%BC/</url>
+    <content><![CDATA[<h1 id="原生-JS-实现"><a href="#原生-JS-实现" class="headerlink" title="原生 JS 实现"></a>原生 JS 实现</h1><h2 id="首先需要禁用滚轮对网页的滚动"><a href="#首先需要禁用滚轮对网页的滚动" class="headerlink" title="首先需要禁用滚轮对网页的滚动"></a>首先需要禁用滚轮对网页的滚动</h2><div class="highlight-container" data-rel="Js"><figure class="iseeu highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 一个指向 DOM 的函数</span></span><br><span class="line"><span class="keyword">const</span> el = <span class="variable language_">document</span>.<span class="property">documentElement</span></span><br><span class="line"><span class="comment">// 定义一个函数，用于禁用默认时间</span></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">onWheel</span> = (<span class="params">e</span>) =&gt; &#123;</span><br><span class="line">    e.<span class="title function_">preventDefault</span>(); <span class="comment">// 阻止默认事件，停止滚动</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 在 DOM 上添加滚轮的监听器，触发 onWheel 函数</span></span><br><span class="line"><span class="comment">// 添加 passive: false 表示该监听器不是被动监听器，防止方法不生效</span></span><br><span class="line">el.<span class="title function_">addEventListener</span>(<span class="string">&#x27;wheel&#x27;</span>, onWheel, &#123; <span class="attr">passive</span>: <span class="literal">false</span> &#125;); </span><br></pre></td></tr></table></figure></div>
+
+<h2 id="绘制帧函数"><a href="#绘制帧函数" class="headerlink" title="绘制帧函数"></a>绘制帧函数</h2><div class="highlight-container" data-rel="Js"><figure class="iseeu highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Silky</span> &#123;</span><br><span class="line">  timeRecord = <span class="number">0</span> <span class="comment">// 回调时间记录</span></span><br><span class="line"></span><br><span class="line">  <span class="title function_">constructor</span>(<span class="params">&#123; content &#125; = &#123;&#125;</span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">content</span> = content || <span class="variable language_">document</span>.<span class="property">documentElement</span></span><br><span class="line">    <span class="keyword">const</span> <span class="title function_">onWeel</span> = (<span class="params">e</span>) =&gt; &#123;</span><br><span class="line">      e.<span class="title function_">preventDefault</span>(); <span class="comment">// 阻止默认事件，停止滚动</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">content</span>.<span class="title function_">addEventListener</span>(<span class="string">&#x27;wheel&#x27;</span>, onWeel, &#123; <span class="attr">passive</span>: <span class="literal">false</span> &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="title function_">raf</span>(<span class="params">time</span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> deltaTime = time - (<span class="variable language_">this</span>.<span class="property">timeRecord</span> || time);</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">timeRecord</span> = time;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(deltaTime * <span class="number">0.001</span>) <span class="comment">// 单位转化为秒，该值后面计算时会用到</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 创建一个实例</span></span><br><span class="line"><span class="keyword">const</span> silky = <span class="keyword">new</span> <span class="title class_">Silky</span>(&#123;&lt;这里可以传入容器元素&gt;&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 循环绘制动画</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">raf</span>(<span class="params">time</span>) &#123;</span><br><span class="line">  silky.<span class="title function_">raf</span>(time);</span><br><span class="line">  <span class="title function_">requestAnimationFrame</span>(raf);</span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_">requestAnimationFrame</span>(raf);</span><br></pre></td></tr></table></figure></div>
+
+<h2 id="实现虚拟滚动来代替鼠标滚动"><a href="#实现虚拟滚动来代替鼠标滚动" class="headerlink" title="实现虚拟滚动来代替鼠标滚动"></a>实现虚拟滚动来代替鼠标滚动</h2><div class="highlight-container" data-rel="Js"><figure class="iseeu highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 在 Silky 添加一下参数和方法</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Silky</span> &#123;</span><br><span class="line">  timeRecord = <span class="number">0</span> <span class="comment">// 回调时间记录</span></span><br><span class="line">  targetScroll = <span class="number">0</span> <span class="comment">// 当前滚动位置</span></span><br><span class="line">  animatedScroll = <span class="number">0</span> <span class="comment">// 动画滚动位置</span></span><br><span class="line">  <span class="keyword">from</span> = <span class="number">0</span> <span class="comment">// 记录起始位置</span></span><br><span class="line">  to = <span class="number">0</span> <span class="comment">// 记录目标位置</span></span><br><span class="line">  ........</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 虚拟滚动方法</span></span><br><span class="line">  <span class="title function_">onVirtualScroll</span>(<span class="params">target</span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">to</span> = target;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">onUpdate</span> = <span class="function">(<span class="params">value</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="variable language_">this</span>.<span class="property">animatedScroll</span> = value; <span class="comment">// 记录动画距离</span></span><br><span class="line">      <span class="variable language_">this</span>.<span class="property">content</span>.<span class="property">scrollTop</span> = <span class="variable language_">this</span>.<span class="property">animatedScroll</span>; <span class="comment">// 设置滚动</span></span><br><span class="line">      <span class="variable language_">this</span>.<span class="property">targetScroll</span> = value; <span class="comment">// 记录滚动后的距离</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p>在滚动时间中调用 onVirtualScroll</p>
+<div class="highlight-container" data-rel="Js"><figure class="iseeu highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title function_">onWeel</span> = (<span class="params">e</span>) =&gt; &#123;</span><br><span class="line">    e.<span class="title function_">preventDefault</span>(); <span class="comment">// 阻止默认事件，停止滚动</span></span><br><span class="line">    <span class="variable language_">this</span>.<span class="title function_">onVirtualScroll</span>(<span class="variable language_">this</span>.<span class="property">targetScroll</span> + e.<span class="property">deltaY</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p>添加 advance 方法，用于更新视图</p>
+<div class="highlight-container" data-rel="Js"><figure class="iseeu highlight js"><table><tr><td class="code"><pre><span class="line"><span class="title function_">raf</span>(<span class="params">time</span>) &#123;</span><br><span class="line">  ......</span><br><span class="line">  <span class="variable language_">this</span>.<span class="title function_">advance</span>()</span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_">advance</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> value = <span class="variable language_">this</span>.<span class="property">to</span></span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">onUpdate</span>?.(value);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<h2 id="线性插值实现阻尼感"><a href="#线性插值实现阻尼感" class="headerlink" title="线性插值实现阻尼感"></a>线性插值实现阻尼感</h2>]]></content>
+      <categories>
+        <category>Web</category>
+      </categories>
+      <tags>
+        <tag>踩坑记录</tag>
+        <tag>技术记录</tag>
+        <tag>Web</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>浅记安卓蓝牙开发</title>
+    <url>/2024/06/06/%E8%93%9D%E7%89%99%E5%BC%80%E5%8F%91/</url>
+    <content><![CDATA[<h2 id="可实现功能"><a href="#可实现功能" class="headerlink" title="可实现功能"></a>可实现功能</h2><ul>
+<li>扫描其他蓝牙设备</li>
+<li>可为配对蓝牙设备查询蓝牙适配器</li>
+<li>建立 RFCOMM 通道</li>
+<li>通过服务搜索来连接其他设备</li>
+<li>与其他设备进行数据传输</li>
+<li>管理多个连接</li>
+</ul>
+<h3 id="BluetoothAdapter"><a href="#BluetoothAdapter" class="headerlink" title="BluetoothAdapter"></a>BluetoothAdapter</h3><p>代表本地蓝牙适配器（蓝牙无线电）。BluetoothAdapter是所有蓝牙交互的入口。使用这个你可以发现其他蓝牙设备，查询已配对的设备列表，使用一个已知的MAC地址来实例化一个BluetoothDevice，以及创建一个BluetoothServerSocket来为监听与其他设备的通信。</p>
+<h3 id="BluetoothDevice"><a href="#BluetoothDevice" class="headerlink" title="BluetoothDevice"></a>BluetoothDevice</h3><p>代表一个远程蓝牙设备，使用这个来请求一个与远程设备的BluetoothSocket连接，或者查询关于设备名称、地址、类和连接状态等设备信息。</p>
+<h3 id="BluetoothSocket"><a href="#BluetoothSocket" class="headerlink" title="BluetoothSocket"></a>BluetoothSocket</h3><p>代表一个蓝牙socket的接口（和TCP Socket类似）。这是一个连接点，它允许一个应用与其他蓝牙设备通过InputStream和OutputStream交换数据。</p>
+<h3 id="BlueToothClass"><a href="#BlueToothClass" class="headerlink" title="BlueToothClass"></a>BlueToothClass</h3><p>描述一个蓝牙设备的基本特性和性能。这是一个只读的属性集合，它定义了设备的主要和次要的设备类以及它的服务。但是，它没有描述所有的蓝牙配置和设备支持的服务，它只是暗示了设备的类型。</p>
+<h3 id="BlutoothProfile"><a href="#BlutoothProfile" class="headerlink" title="BlutoothProfile"></a>BlutoothProfile</h3><p>一个表示蓝牙配置文件的接口。一个Bluetooth profile是一个基于蓝牙的通信无线接口定义。一个例子是Hands-Free profile。</p>
+<h3 id="BluetoothHeadset"><a href="#BluetoothHeadset" class="headerlink" title="BluetoothHeadset"></a>BluetoothHeadset</h3><p>提供对移动手机使用的蓝牙耳机的支持。它包含了Headset and Hands-Free (v1.5)配置文件。</p>
+<h3 id="BluetoothA2dp"><a href="#BluetoothA2dp" class="headerlink" title="BluetoothA2dp"></a>BluetoothA2dp</h3><p>定义高品质的音频如何通过蓝牙连接从一个设备传输到另一个设备。”A2DP“是Advanced Audio Distribution Profile的缩写。</p>
+<h3 id="BluetoothHealth"><a href="#BluetoothHealth" class="headerlink" title="BluetoothHealth"></a>BluetoothHealth</h3><p>表示一个Health Device Profile代理，它控制蓝牙服务。</p>
+<h3 id="BluetoothHealthCallback"><a href="#BluetoothHealthCallback" class="headerlink" title="BluetoothHealthCallback"></a>BluetoothHealthCallback</h3><p>一个抽象类，你可以使用它来实现BluetoothHealth的回调函数。你必须扩展这个类并实现回调函数方法来接收应用程序的注册状态改变以及蓝牙串口状态的更新。</p>
+<h3 id="BluetoothHealthAppConfiguration"><a href="#BluetoothHealthAppConfiguration" class="headerlink" title="BluetoothHealthAppConfiguration"></a>BluetoothHealthAppConfiguration</h3><p>表示一个应用程序配置，Bluetooth Health第三方应用程序注册和一个远程Bluetooth Health设备通信。</p>
+<h3 id="BluetoothProfile-ServiceListener"><a href="#BluetoothProfile-ServiceListener" class="headerlink" title="BluetoothProfile.ServiceListener"></a>BluetoothProfile.ServiceListener</h3><p>一个接口，当BluetoothProfile IPC客户端从服务器上建立连接或断开连接时，它负责通知它们（也就是，运行在特性配置的内部服务）。</p>
+<h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><ol>
+<li><p>首先需要获取 BluetoothAdapter </p>
+<p>对于新的API，直接使用 BluetoothAdapter.getDefaultAdapter() 已经过时了，需要使用上下文来获取 BluetoothAdapter</p>
+<div class="highlight-container" data-rel="Kotlin"><figure class="iseeu highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="keyword">val</span> bluetoothAdapter: BluetoothAdapter = (context.getSystemService(Context.BLUETOOTH_SERVICE) <span class="keyword">as</span> BluetoothManager).adapter</span><br></pre></td></tr></table></figure></div></li>
+</ol>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+      <tags>
+        <tag>技术记录</tag>
+        <tag>Android</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>安卓页面转跳</title>
+    <url>/2024/06/04/%E9%A1%B5%E9%9D%A2%E8%BD%AC%E8%B7%B3/</url>
+    <content><![CDATA[<h2 id="通过点击按钮进行转跳"><a href="#通过点击按钮进行转跳" class="headerlink" title="通过点击按钮进行转跳"></a>通过点击按钮进行转跳</h2><div class="highlight-container" data-rel="Kotlin"><figure class="iseeu highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="keyword">val</span> settingButton = findViewById&lt;ImageButton&gt;(R.id.setting_button)</span><br><span class="line">settingButton.setOnClickListener &#123;</span><br><span class="line">    <span class="keyword">val</span> intent = Intent(<span class="keyword">this</span>, SettingActivity::<span class="keyword">class</span>.java)<span class="comment">// 创建一个 Intent 对象，由当前 activity 指向SettingActivity</span></span><br><span class="line">    startActivity(intent)<span class="comment">// 这个方法是Activity类的一个方法，它用于启动一个新的Activity</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p>Intent是一种运行时绑定（runtime binding）机制，它能够使不同的组件之间进行交互</p>
+<p>::class.java 是在 kotlin 中获取 java 类对象的语法，</p>
+]]></content>
+      <categories>
+        <category>Android</category>
+      </categories>
+      <tags>
+        <tag>踩坑记录</tag>
+        <tag>Android</tag>
+      </tags>
+  </entry>
+</search>
