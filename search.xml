@@ -475,26 +475,6 @@
       </tags>
   </entry>
   <entry>
-    <title>关于CSS中scroll--snap未生效</title>
-    <url>/2024/05/19/%E5%85%B3%E4%BA%8E%20CSS%20%E4%B8%AD%20scroll-snap%20%E6%9C%AA%E7%94%9F%E6%95%88/</url>
-    <content><![CDATA[<h2 id="CSS中scroll–snap未生效"><a href="#CSS中scroll–snap未生效" class="headerlink" title="CSS中scroll–snap未生效"></a>CSS中scroll–snap未生效</h2><div class="highlight-container" data-rel="Html"><figure class="iseeu highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;header&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;container&quot;</span> <span class="attr">class</span>=<span class="string">&quot;container&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;page1&quot;</span> <span class="attr">class</span>=<span class="string">&quot;pages&quot;</span> <span class="attr">style</span>=<span class="string">&quot;background-color: aqua&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;page2&quot;</span> <span class="attr">class</span>=<span class="string">&quot;pages&quot;</span> <span class="attr">style</span>=<span class="string">&quot;background-color: #3c71b5&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;page3&quot;</span> <span class="attr">class</span>=<span class="string">&quot;pages&quot;</span> <span class="attr">style</span>=<span class="string">&quot;background-color: #2422bf&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure></div>
-
-<div class="highlight-container" data-rel="Css"><figure class="iseeu highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.pages</span> &#123;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">100vh</span>;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">    <span class="attribute">scroll-snap-align</span>: start;</span><br><span class="line">    <span class="attribute">scroll-snap-stop</span>: always;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.container</span> &#123;</span><br><span class="line">    <span class="attribute">scroll-snap-type</span>: y mandatory;</span><br><span class="line">    <span class="attribute">overflow-y</span>: auto;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
-
-<p>此时F12发现有吸附点，但并没有吸附，原因是直接父容器没有给予高度</p>
-<h2 id="实现！！"><a href="#实现！！" class="headerlink" title="实现！！"></a>实现！！</h2><div class="highlight-container" data-rel="Css"><figure class="iseeu highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.pages</span> &#123;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">100vh</span>;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">    <span class="attribute">scroll-snap-align</span>: start;</span><br><span class="line">    <span class="attribute">scroll-snap-stop</span>: always;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.container</span> &#123;</span><br><span class="line">    <span class="attribute">scroll-snap-type</span>: y mandatory;</span><br><span class="line">    <span class="attribute">overflow-y</span>: auto;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">100vh</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
-
-]]></content>
-      <categories>
-        <category>Web</category>
-      </categories>
-      <tags>
-        <tag>踩坑记录</tag>
-        <tag>Web</tag>
-        <tag>CSS</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>使用 clip-path 实现 Web 滑动条</title>
     <url>/2023/12/30/clip-path%E7%9A%84%E4%BD%BF%E7%94%A8/</url>
     <content><![CDATA[<p><code>clip-path</code>属性可以创建一个只有部分可见的元素</p>
@@ -512,6 +492,26 @@
       <tags>
         <tag>技术记录</tag>
         <tag>Web</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>关于CSS中scroll--snap未生效</title>
+    <url>/2024/05/19/%E5%85%B3%E4%BA%8E%20CSS%20%E4%B8%AD%20scroll-snap%20%E6%9C%AA%E7%94%9F%E6%95%88/</url>
+    <content><![CDATA[<h2 id="CSS中scroll–snap未生效"><a href="#CSS中scroll–snap未生效" class="headerlink" title="CSS中scroll–snap未生效"></a>CSS中scroll–snap未生效</h2><div class="highlight-container" data-rel="Html"><figure class="iseeu highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;header&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;container&quot;</span> <span class="attr">class</span>=<span class="string">&quot;container&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;page1&quot;</span> <span class="attr">class</span>=<span class="string">&quot;pages&quot;</span> <span class="attr">style</span>=<span class="string">&quot;background-color: aqua&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;page2&quot;</span> <span class="attr">class</span>=<span class="string">&quot;pages&quot;</span> <span class="attr">style</span>=<span class="string">&quot;background-color: #3c71b5&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;page3&quot;</span> <span class="attr">class</span>=<span class="string">&quot;pages&quot;</span> <span class="attr">style</span>=<span class="string">&quot;background-color: #2422bf&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure></div>
+
+<div class="highlight-container" data-rel="Css"><figure class="iseeu highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.pages</span> &#123;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">100vh</span>;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">    <span class="attribute">scroll-snap-align</span>: start;</span><br><span class="line">    <span class="attribute">scroll-snap-stop</span>: always;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.container</span> &#123;</span><br><span class="line">    <span class="attribute">scroll-snap-type</span>: y mandatory;</span><br><span class="line">    <span class="attribute">overflow-y</span>: auto;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p>此时F12发现有吸附点，但并没有吸附，原因是直接父容器没有给予高度</p>
+<h2 id="实现！！"><a href="#实现！！" class="headerlink" title="实现！！"></a>实现！！</h2><div class="highlight-container" data-rel="Css"><figure class="iseeu highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-class">.pages</span> &#123;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">100vh</span>;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">    <span class="attribute">scroll-snap-align</span>: start;</span><br><span class="line">    <span class="attribute">scroll-snap-stop</span>: always;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.container</span> &#123;</span><br><span class="line">    <span class="attribute">scroll-snap-type</span>: y mandatory;</span><br><span class="line">    <span class="attribute">overflow-y</span>: auto;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">100vh</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+]]></content>
+      <categories>
+        <category>Web</category>
+      </categories>
+      <tags>
+        <tag>踩坑记录</tag>
+        <tag>Web</tag>
+        <tag>CSS</tag>
       </tags>
   </entry>
   <entry>
