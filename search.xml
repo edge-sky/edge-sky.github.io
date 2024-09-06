@@ -660,7 +660,7 @@
 <h2 id="zerotier-的配置"><a href="#zerotier-的配置" class="headerlink" title="zerotier 的配置"></a>zerotier 的配置</h2><p><img  
                      lazyload
                      src="/images/loading.svg"
-                     data-src="https://cdn.nlark.com/yuque/0/2024/png/46515718/1725347480068-02665ea2-ce94-4a83-b39a-00ad6801aa47.png"
+                     data-src="https://s1.imagehub.cc/images/2024/09/06/6f2bacde4c1f62c23371d0cd58cfa6dd.png"
                      
                 ></p>
 <p>首先进入官网 <a class="link"   href="https://www.zerotier.com/" >zerotier <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>，导航栏上有Download字样，一会需要去到那里下载相应软件。先注册一个账号，看到右上角sign up注册或直接login登录</p>
@@ -668,7 +668,7 @@
 <p><img  
                      lazyload
                      src="/images/loading.svg"
-                     data-src="https://cdn.nlark.com/yuque/0/2024/png/46515718/1725348270875-32e456c3-8ea0-4e65-a4c3-f477577717ac.png"
+                     data-src="https://s1.imagehub.cc/images/2024/09/06/076015e0b649c8fb05d0900005f6f7cd.png"
                      
                 ></p>
 <ul>
@@ -680,7 +680,7 @@
 <p><img  
                      lazyload
                      src="/images/loading.svg"
-                     data-src="https://cdn.nlark.com/yuque/0/2024/png/46515718/1725348045216-8040b9e1-e799-48bc-bc0c-7fdfb8a35f31.png"
+                     data-src="https://s1.imagehub.cc/images/2024/09/06/cb130564771d96607d3b17c2a297ceef.png"
                      
                 ></p>
 <h3 id="安装-zerotier"><a href="#安装-zerotier" class="headerlink" title="安装 zerotier"></a>安装 zerotier</h3><p>打开<a class="link"   href="https://www.zerotier.com/download/" >www.zerotier.com/download/ <i class="fa-regular fa-arrow-up-right-from-square fa-sm"></i></a>下载并安装</p>
@@ -690,15 +690,15 @@
 <p>此时设备应该是能够连接到同一个虚拟网络了，但会发现延迟极高，因为根服务器在国外，连接速度慢且没能成功进行P2P连接，这时候如果你有一台在国内的云服务器我们就可以自建一个中转节点进行加速</p>
 <h2 id="配置Moon节点"><a href="#配置Moon节点" class="headerlink" title="配置Moon节点"></a>配置Moon节点</h2><p>恰好在阿里云有一台云服务器，建议安装宝塔面板方便操作，这里使用Docker进行部署，没有安装Docker的可以在宝塔应用商店进行安装</p>
 <p>下载完成后使用命令 </p>
-<p>docker run –name zerotier-moon -d –restart always -p 9993:9993&#x2F;udp -v &#x2F;home&#x2F;zerotier-moon:&#x2F;var&#x2F;lib&#x2F;zerotier-one <font style="color:rgb(51, 51, 51);">seedgou&#x2F;zerotier-moon</font> -4 xx.xx.xx.xx </p>
+<p>docker run –name zerotier-moon -d –restart always -p 9993:9993&#x2F;udp -v &#x2F;home&#x2F;zerotier-moon:&#x2F;var&#x2F;lib&#x2F;zerotier-one seedgou&#x2F;zerotier-moon -4 xx.xx.xx.xx </p>
 <p>进行安装，xx.xx.xx.xx替换为你的服务器IP地址，容器名字可约自行更改，放行9993 udp端口，记得在在宝塔面板和服务器安全组放行</p>
-<p>如果安装成功，在服务器的命令行输入 <font style="color:rgb(51, 51, 51);">docker logs zerotier-moon 会输出你的 mood id 和入轨指令，形如 zerotier-cli orbit xxx xxx(xxx是你的mood id)，将它记下</font></p>
-<p><font style="color:rgb(51, 51, 51);">Windows默认安装目录为 C:\Program Files (x86)\ZeroTier\One，在该目录下使用命令行运行入轨命令，若不成功尝试使用管理员身份，在该目录下使用命令 zerotier-cli listpeers 可以查看已连接的节点，如果找到以 Moon 结尾的说明节点添加成功</font></p>
-<p><font style="color:rgb(51, 51, 51);">在非官方版本的安卓app中右上角&#x2F;入轨，点击加号选择 从入轨导入 地址和种子都填你的 moon id。添加完成后返回上一页，点击右上角的 结点列表 查看是否有刚刚添加的 Moon中转，如果延迟不是-1说明连接成功</font></p>
+<p>如果安装成功，在服务器的命令行输入 docker logs zerotier-moon 会输出你的 mood id 和入轨指令，形如 zerotier-cli orbit xxx xxx(xxx是你的mood id)，将它记下</p>
+<p>Windows默认安装目录为 C:\Program Files (x86)\ZeroTier\One，在该目录下使用命令行运行入轨命令，若不成功尝试使用管理员身份，在该目录下使用命令 zerotier-cli listpeers 可以查看已连接的节点，如果找到以 Moon 结尾的说明节点添加成功</p>
+<p>在非官方版本的安卓app中右上角&#x2F;入轨，点击加号选择 从入轨导入 地址和种子都填你的 moon id。添加完成后返回上一页，点击右上角的 结点列表 查看是否有刚刚添加的 Moon中转，如果延迟不是-1说明连接成功</p>
 <p><img  
                      lazyload
                      src="/images/loading.svg"
-                     data-src="https://cdn.nlark.com/yuque/0/2024/jpeg/46515718/1725350962342-e4b2c1b9-5cf3-422d-ad09-9be5eca5942f.jpeg"
+                     data-src="https://s1.imagehub.cc/images/2024/09/06/2e604fa13649245fcb13897d887a4f95.jpg"
                      
                 ></p>
 <p>此时理论上多台设备已经处于一个虚拟局域网中了，能够进行串流，传文件等局域网内操作。如果两端的网络环境都不是很复杂的话(比如对称型，难以打洞)应该能够P2P直连。</p>
