@@ -692,7 +692,7 @@
 <p>下载完成后使用命令 </p>
 <p>docker run –name zerotier-moon -d –restart always -p 9993:9993&#x2F;udp -v &#x2F;home&#x2F;zerotier-moon:&#x2F;var&#x2F;lib&#x2F;zerotier-one seedgou&#x2F;zerotier-moon -4 xx.xx.xx.xx </p>
 <p>进行安装，xx.xx.xx.xx替换为你的服务器IP地址，容器名字可约自行更改，放行9993 udp端口，记得在在宝塔面板和服务器安全组放行</p>
-<p>如果安装成功，在服务器的命令行输入 docker logs zerotier-moon 会输出你的 mood id 和入轨指令，形如 <strong>zerotier-cli orbit xxx xxx</strong>(xxx是你的mood id)，将它记下</p>
+<p>如果安装成功，在服务器的命令行输入 docker logs zerotier-moon 会输出你的 mood id 和入轨指令，形如 zerotier-cli orbit xxx xxx(xxx是你的mood id)，将它记下</p>
 <p>Windows默认安装目录为 C:\Program Files (x86)\ZeroTier\One，需要在该目录下使用命令行运行入轨命令，若不成功尝试使用管理员身份；在该目录下使用命令 zerotier-cli listpeers 可以查看已连接的节点，如果找到以 Moon 结尾的说明节点添加成功</p>
 <p>在非官方版本的安卓app中右上角&#x2F;入轨，点击加号选择 从入轨导入 地址和种子都填你的 moon id。添加完成后返回上一页，点击右上角的 结点列表 查看是否有刚刚添加的 Moon中转，如果延迟不是-1说明连接成功</p>
 <p><img  
